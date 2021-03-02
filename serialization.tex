@@ -1,0 +1,9 @@
+\section{Serialization}
+\label{sec:serialization}
+
+In order for PAML objects to be readily stored and exchanged, it is important that they are able to be {\em serialized}, i.e., converted to a sequence of bytes that can be stored in a file or exchanged over a network.  
+%
+To this end, PAML builds upon the Resource Description Framework (RDF).  RDF is an abstract language for describing conceptual graph-oriented data models, and therefore does not mandate any specific serialization format.  Instead, a number of different serialization formats are provided as separate specifications, such as RDF/XML, N-Triples, JSON-LD, and Turtle.  These serialization formats are widely supported by RDF libraries such as rdflib for Python and Apache Jena for Java.
+
+All PAML libraries SHOULD support at least RDF/XML, N-Triples, JSON-LD, and Turtle.
+Other PAML tools SHOULD support at least one of these four formats.
