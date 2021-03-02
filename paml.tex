@@ -1,0 +1,150 @@
+
+\errorcontextlines=200
+
+\documentclass[finalspec]{sbmlpkgspec}
+%% \documentclass[draftspec]{sbmlpkgspec}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{todonotes}
+\usepackage[color]{changebar}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{subcaption}
+\usepackage{longtable}
+
+% Make changebars switchable to allow faster compilation:
+%\def\fullchangebars{} % comment this out to simplify changebars and speed up compilation
+
+% Macros just for this document:
+
+\newcommand{\sbmlpkg}{\texorpdfstring{%
+    \textls[-25]{\textsc{SBMLPkgSpec}}}{%
+    \textsc{SBMLPkgSpec}}\xspace}
+\newcommand{\sbmlpkghead}{\texorpdfstring{%
+    \textls[-50]{\textsc{SBMLPkgSpec}}}{%
+    \textsc{SBMLPkgSpec}}\xspace}
+\newcommand{\sbmlpkgfile}{\literalFont{sbmlpkgspec.cls}\xspace}
+\newcommand{\latex}{\LaTeX{}\xspace}
+\newcommand{\tex}{\TeX{}\xspace}
+\newcommand{\distURL}{http://sourceforge.net/projects/sbml/files/specifications/tex}
+\newcommand{\srcURL}{https://sbml.svn.sourceforge.net/svnroot/sbml/trunk/project/tex/sbmlpkgspec}
+\newcommand{\webURL}{http://sbml.org/Documents/Specifications/The_SBMLPkgSpec_LaTeX_class}
+\newcommand{\cmd}[1]{\literalFont{\textbackslash #1}}
+
+% Custom latex listing style, for use with the listings package.  The default
+% highlights far too many things, IMHO.  This keeps it simple and only adjusts
+% the appearance of comments within listings.
+
+\lstdefinelanguage{mylatex}{%
+  morekeywords={},%
+  sensitive,%
+  alsoother={0123456789$_},%$
+  morecomment=[l]\%%
+}[keywords,tex,comments]
+
+\lstdefinestyle{latex}{language=mylatex}
+
+
+%Command to format the listings containing SBOL RDF/XML serialization examples
+\newcommand{\lstsetsbol}{
+ \lstset{language=paml,
+        tabsize=2
+ }
+}
+
+%Commands to format SBOL terms in the document
+
+% Use sbolheading when you are referencing an SBOL data model class/field in a
+% section heading.
+\newcommand{\pamlheading}[1]{\texttt{#1}}
+
+% Use sbol when you are referencing an SBOL data model class/field in text.
+\newcommand{\paml}[1]{\texttt{\hyperref[sec:#1]{#1}}}
+
+% Use sbolmult for SBOL fields that appear in multiple classes, for example
+% \sbolmult{types:CD}{types}. This ensures the reference links to the correct
+% section.
+\newcommand{\pamlmult}[2]{\texttt{\hyperref[sec:#1]{#2}}}
+
+% Use sbol when you are using a class borrowed from SBOL, this will prepend the "sbol:" prefix as well
+\newcommand{\sbol}[1]{\texttt{\hyperref[sec:sbol:#1]{sbol:#1}}}
+
+% Use sbolmult for SBOL fields that appear in multiple classes, for example
+% \sbolmult{types:CD}{types}. This ensures the reference links to the correct
+% section.
+\newcommand{\sbolmult}[2]{\texttt{\hyperref[sec:sbol:#1]{sbol:#2}}}
+
+% Use prov when you are using a class borrowed from Prov-O, this will prepend the "prov:" prefix as well
+\newcommand{\prov}[1]{\texttt{\hyperref[sec:prov:#1]{prov:#1}}}
+
+% Use provmult for Prov-O fields that appear in multiple classes, for example
+% \sbolmult{hadRole:U}{hadRole}. This ensures the reference links to the correct
+% section.
+\newcommand{\provmult}[2]{\texttt{\hyperref[sec:prov:#1]{prov:#2}}}
+
+% Use om when you are using a class borrowed from Ontology of Units & Measures, this will prepend the "om:" prefix as well
+\newcommand{\om}[1]{\texttt{\hyperref[sec:om:#1]{om:#1}}}
+
+% Use provmult for OM fields that appear in multiple classes, for example
+% \sbolmult{hadUnit:M}{hadUnit}. This ensures the reference links to the correct
+% section.
+\newcommand{\ommult}[2]{\texttt{\hyperref[sec:om:#1]{om:#2}}}
+
+%Command to format external terms in the document
+\newcommand{\external}[1]{\texttt{#1}}
+
+% Rarely used. Use refObj you want to put the field in angle brackets.
+\newcommand{\refObj}[1]{$\langle$#1$\rangle$}
+
+% -----------------------------------------------------------------------------
+% Start of document
+% -----------------------------------------------------------------------------
+
+\begin{document}
+
+\packageTitle{\latex PAML Specifications}
+\packageVersion{Version 1.0}
+\packageVersionDate{TBD, 2021}
+
+\title{Protocol Activity Markup Language \texorpdfstring{\\[3pt]}{}\mbox{(PAML) Version~1.0.0}}
+
+\author{
+\begin{tabular}{l>{\hspace*{15pt}}r}
+Bryan Bartley & \emph{Raytheon BBN Technologies, USA} \\
+Jacob Beal & \emph{Raytheon BBN Technologies, USA}\\   
+Daniel Bryce & \emph{SIFT, USA}\\
+Robert Goldman & \emph{SIFT, USA}\\
+Benjamin Keller & \emph{University of Washington, USA}\\
+Jack Ladwig & \emph{SIFT, USA}\\
+Peter Lee & \emph{Strateos, USA}\\
+Richard Markeloff & \emph{Raytheon BBN Technologies, USA}\\   
+Tramy Nguyen & \emph{Raytheon BBN Technologies, USA}\\   
+Joshua Nowak & \emph{Strateos, USA}\\
+Mark Weston & \emph{Netrias, USA}\\
+\end{tabular}\\
+}
+
+\maketitlepage
+
+\maketableofcontents
+
+%\input{purpose}
+
+%\input{overview}
+
+\input{vocabulary}
+
+%\input{sbolImports}
+
+\input{dataModel}
+
+\input{serialization}
+
+\newpage
+\bibliography{paml}
+
+\appendix
+
+%\input{examples}
+
+\end{document}
