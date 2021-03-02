@@ -1,5 +1,7 @@
 # PAML Specification
 
+PAML is the Protocol Activity Markup Language
+
 ## UML build instructions:
 
 Run this in first the OPIL, then the PAML directory to build the UML:
