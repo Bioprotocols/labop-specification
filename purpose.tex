@@ -1,0 +1,17 @@
+% -----------------------------------------------------------------------------
+\section{Purpose}
+% -----------------------------------------------------------------------------
+
+Laboratory protocols are critical to biological research and development, but can be difficult to communicate or reproduce due to the differences in context, skills, and resources between different projects, investigators, and organizations.
+The Protocol Activity Markup Language (PAML) aims to address this problem by providing a data model for description of laboratory protocols that is unambiguous enough for precise interpretation and automation, yet simultaneously abstract enough to support reuse and adaptation.
+
+Where possible, PAML builds on other existing standards.
+In particular, PAML uses the Unified Modeling Language (UML) version 2.5.1~\citep{uml251} to describe the organization of actions in a protocol, the Synthetic Biology Open Language (SBOL) version 3~\citep{SBOL3} to describe biological materials in terms of combinations of strains, media, etc., and uses the Ontology of Units of Measure (OM)~\citep{om2} to describe parameters with physical units.
+As a foundation, PAML uses existing Semantic Web practices and resources, such as \emph{Uniform Resource Identifiers} (\paml{URI}s) and ontologies, to unambiguously identify and define biological system elements.
+and to provide serialization formats for encoding this information in electronic data files, as well as the SBOL approach to closure in reasoning about knowledge
+This approach also allows PAML to be extended with additional custom information for particular uses and deployments.
+
+Note, however, that PAML intentionally does not provide explicit guarantees about transfer or replicability of protocol executions. 
+Likewise, PAML is agnostic to any details of computer networking used to discover or share protocols.
+PAML focuses only on representing the minimal information required for an unambiguous specification of what is believed to be important in the execution of a protocol.
+
