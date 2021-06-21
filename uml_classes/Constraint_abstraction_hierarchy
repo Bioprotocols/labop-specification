@@ -1,0 +1,9 @@
+digraph Constraint {
+	Identified -> Constraint [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	Identified [label="{Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Constraint -> Identified [label="constrainedElement [0..*]" arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	Identified [label="{Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Constraint -> ValueSpecification [label="specification [1..1]" arrowhead=vee arrowtail=diamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	ValueSpecification [label="{ValueSpecification|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Constraint [label="{Constraint|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

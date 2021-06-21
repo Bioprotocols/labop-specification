@@ -1,0 +1,5 @@
+digraph ValueSpecification {
+	Identified -> ValueSpecification [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	Identified [label="{Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ValueSpecification [label="{ValueSpecification|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

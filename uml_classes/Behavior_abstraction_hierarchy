@@ -1,0 +1,11 @@
+digraph Behavior {
+	TopLevel -> Behavior [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	TopLevel [label="{TopLevel|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Behavior -> Constraint [label="postcondition [0..*]" arrowhead=vee arrowtail=diamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	Constraint [label="{Constraint|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Behavior -> Constraint [label="precondition [0..*]" arrowhead=vee arrowtail=diamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	Constraint [label="{Constraint|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Behavior -> Parameter [label="ownedParameter [0..*]" arrowhead=vee arrowtail=diamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	Parameter [label="{Parameter|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Behavior [label="{Behavior|isReentrant [1..1]: boolean\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

@@ -1,0 +1,18 @@
+digraph ActivityEdge {
+	ActivityEdge [label="{ActivityEdge|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ObjectFlow [label="{ObjectFlow|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ActivityEdge -> ObjectFlow [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	ActivityEdge [label="{ActivityEdge|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ObjectFlow [label="{ObjectFlow|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ControlFlow [label="{ControlFlow|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ActivityEdge -> ControlFlow [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	ActivityEdge [label="{ActivityEdge|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ControlFlow [label="{ControlFlow|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Identified -> ActivityEdge [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	Identified [label="{Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ActivityEdge -> ActivityNode [label="source [1..1]" arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	ActivityNode [label="{ActivityNode|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ActivityEdge -> ActivityNode [label="target [1..1]" arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	ActivityNode [label="{ActivityNode|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	ActivityEdge [label="{ActivityEdge|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

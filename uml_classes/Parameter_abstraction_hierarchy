@@ -1,0 +1,11 @@
+digraph Parameter {
+	Identified -> Parameter [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	Identified [label="{Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Parameter -> ValueSpecification [label="upperValue [0..1]" arrowhead=vee arrowtail=diamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	ValueSpecification [label="{ValueSpecification|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Parameter -> ValueSpecification [label="lowerValue [0..1]" arrowhead=vee arrowtail=diamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	ValueSpecification [label="{ValueSpecification|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Parameter -> ValueSpecification [label="defaultValue [0..1]" arrowhead=vee arrowtail=diamond dir=both fontname="Bitstream Vera Sans" fontsize=8]
+	ValueSpecification [label="{ValueSpecification|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	Parameter [label="{Parameter|direction [1..1]: URI\lisUnique [1..1]: boolean\ltype [0..1]: URI\lisOrdered [1..1]: boolean\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}
