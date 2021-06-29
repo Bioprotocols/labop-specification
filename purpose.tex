@@ -30,6 +30,8 @@ A key requirement here will be maintaining information about the \emph{actual ve
 
 \item[Protocol maintenance] Closely related to the tasks of ``Modification,'' and ``Derived works'' are the ongoing development, repair, and versioning of a protocol.
 
+\item[Execution] To enable replication, PAML must specify what it means to execute a protocol correctly.  This definition must support a wide range of degrees of lab automation, from entirely manual, to manual supported by some automated workstation to entirely robotic.  Specifically this involves giving a \emph{compositional} account of the execution semantics in which the meaning of the protocol is a function of its component actions and the relationships between them.  This also involves supporting \emph{translation} from PAML to alternative representations for different uses.  For example, an initial PAML proof-of-concept translates PAML to Markdown\footnote{\url{https://github.com/SD2E/paml} for the translator, \url{https://commonmark.org/} gives the Markdown spec.} for labs operated by technicians, and an initial translation to Autoprotocol\footnote{\url{autoprotocol.org}} for wholly robotic laboratories using that control standard.
+
 \end{description}
 
 Where possible, PAML builds on other existing standards.
