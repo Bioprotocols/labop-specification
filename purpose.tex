@@ -5,34 +5,53 @@
 Laboratory protocols are critical to biological research and development, but can be difficult to communicate or reproduce due to the differences in context, skills, and resources between different projects, investigators, and organizations.
 The Protocol Activity Markup Language (PAML) aims to address this problem by providing a data model for description of laboratory protocols that is unambiguous enough for precise interpretation and automation, yet simultaneously abstract enough to support reuse and adaptation.
 
-It behoves us to unpack the notion of replicability further, in order to better undestand the requirements on PAML as an artifact.  What does it mean to be ``unambiguous enough for precise interpretation and automation'' and `` support reuse and adaptation''? More specifically, what \emph{computational tasks} must PAML support?  We list here a bare minimum set of tasks; there are opportunities to add many more:
+\subsection{Requirements}
+
+In order to better understand the requirements on PAML as an artifact, here is an enumeration unpacking some of the key computational tasks that PAML needs to be able to support in order to further the goals above:
 
 \begin{description}
-\item[Instantiation] An \emph{abstract} protocol specifies a \emph{recipe} for scientific investigation.  A concrete \emph{instance of} a protocol is an execution of the recipe at a specific time and place, on a specific set of equipment, etc.  This implies at least two representational requirements:
+\item[Instantiation] An \emph{abstract} protocol specifies a recipe to be followed in the laboratory.  A concrete \emph{instance} of a protocol is an execution of such a recipe at a specific time and place, on a specific set of equipment, etc.  This implies at least two representational requirements:
   \begin{description}
-  \item[Instantiation Proper] We must be able to create some persistent data structure that represents the protocol instance.
-  \item[Derivation] We must be able to represent the relationship between the protocol instance and the recipe from which it is derived.
+  \item[Execution Record] We must be able to create some persistent data structure that records an instance in which a protocol is executed.
+  \item[Derivation] We must be able to record the relationship between the execution record for a protocol instance and the protocol recipe from which it is derived.
   \end{description}
 
-\item[Modification] We must be able to record modifications made to the original recipe, for example, to enable it to be executed at a lab with different equipment from the lab at which it was originated, to enable the protocol to be scaled up or scaled down, etc.
+\item[Metadata markup] Closely related to instantiation, a PAML protocol description should support automatic metadata tagging of data that are collected in the course of protocol execution, \emph{to the extent lab automation at the executing lab supports this}.  
+For example, a protocol that collects flow cytometry data on samples of different strains under varying growth conditions, should support automatic association of each FCS file produced by the flow cytometer with the strain, growth conditions, time of data collection, calibration, etc. of the sample from which the FCS file was produced.
+
+\item[Mapping a protocol to a laboratory] PAML aims to support replication in part by providing automated support for mapping protocols developed at one lab onto another.  
+%We suspect that for some time to come this will be at best a semi-automated process, and like verification, this task will fall heavily on those who provide tool support for PAML users.  However, also as for verification, 
+Note, however, that PAML intentionally will not attempt to provide explicit guarantees about transfer or replicability of protocol executions. 
+Such guarantees cannot be made for a poorly understood or overly delicate protocol, no matter how it is described.
+Rather, the PAML specification must allow a protocol to say how to {\em predict} if a mapping will product a correct execution and how to {\em check} if an execution should be considered correct, i.e., what a protocol specification truly requires, what aspects can safely be varied, which must be honored, and what reasonable tolerances are for inputs and outputs. 
+
+\item[Execution] To enable replication, PAML must specify what it means to execute a protocol correctly.  This definition must support a wide range of degrees of lab automation, from entirely manual, to manual supported by some automated workstation to entirely robotic.  Specifically this involves giving a \emph{compositional} account of the execution semantics in which the meaning of the protocol is a function of its component actions and the relationships between them.  This also involves supporting \emph{translation} from PAML to alternative representations for different uses.  For example, an initial PAML proof-of-concept translates PAML to Markdown\footnote{\url{https://github.com/SD2E/paml} for the translator, \url{https://commonmark.org/} gives the Markdown spec.} for labs operated by technicians, and an initial translation to Autoprotocol\footnote{\url{autoprotocol.org}} for wholly robotic laboratories using that control standard.
+
+\item[Modification] We must be able to record modifications made to an original protocol. For example, a protocol may be modified in order to enable the protocol to be executed at a lab with different equipment from the lab at which it was originated, to enable the protocol to be scaled up or scaled down, etc.
 
 A use pattern that may end up being common is to have a protocol be ``too strict" (too specific) to be instantiated in a lab, and thus need modification. Rather than the modification being a patch, as one might do in programming, however, the user would generalize the original protocol \emph{into a new protocol} that is a generalization allowing it to be instantiated in both the labs where it was originated \emph{and} in new labs.  This new protocol would be released as an updated version of the existing protocol.
 
 In this context, the term ``modification'' is intended to refer to \emph{tracking modifications}: what is required is a combination of \emph{versioning} and \emph{provenance tracking}.  A method for computing understandable version differences would also be part of this high level task, which encompasses ongoing development and versioning of the protocol.
 
-A key requirement here will be maintaining information about the \emph{actual version} of the protocol used in an experiment, and underlying a particular dataset, in order that versioning issues not cause incorrect data interpretation.
+A key requirement here will be maintaining information about the \emph{specific version} of the protocol used in an execution record, and underlying a particular dataset, in order to ensure that new versions released later do not cause incorrect data interpretation.
 
-\item[Metadata markup] A PAML protocol description (possibly with some ancillary information supplied by, e.g., an OPIL document, the container ontology, etc.) should support automatically tagging with metadata data that are collected in the course of protocol execution, \emph{to the extent lab automation at the executing lab supports this}.  For example, a protocol that collects flow cytometry data on samples of different strains under varying growth conditions, should support automatically recording the strain, growth conditions, time of data collection, calibration, etc. of these measurements.
-\item[Planning and scheduling] Lab resources are valuable and scarce, and some organizations will want to be able to optimize their use. To do so, PAML should support (at least) extraction of resource requirements from activities in the protocol, and estimated durations.  Note that \emph{what} resource requirements and duration estimates are required will likely be a function of both the protocol and the lab.  What resources are limited, and must be considered in a planner or scheduler, versus those that can be effectively treated as unlimited, will vary by lab.  Management styles will also vary between organizations.
-\item[Verification] Authoring a formal protocol in PAML requires substantial mental effort, and the usefulness of the corresponding artifacts can be compromised if they are ill-formed or erroneous.  Supporting protocol authors in achieving correctness is an important goal. Some of this will fall onto the shoulders of those building PAML support tools, however the specification itself must provide guidance as to what it means for a protocol to be complete, consistent, etc.
-\item[Mapping protocols to labs] PAML aims to support replication in part by providing automated support for mapping protocols developed at one lab onto another.  We suspect that for some time to come this will be at best a semi-automated process, and like verification, this task will fall heavily on those who provide tool support for PAML users.  However, also as for verification, the PAML specification must say what it means to perform this task correctly -- what a protocol specification truly requires, what aspects can safely be varied, and which must be honored.  This task is closely tied to the task of verification.
-\item[Authoring derived works] As with most complex formal artifacts (programs, spreadsheets, etc.), we confidently expect that few users will create new protocols from an entirely blank slate.  Instead, most will take an existing protocol, copy it, and edit the copy.  PAML must support this mode of operation.  Key issues here are which component structures can be incorporated by reference, and which must be copied instead.  Tracking the relationship between an original protocol, and protocols that have branched from it would also be desirable, in order to support, for example, propagating fixes from a root protocol to others.
+\item[Authoring derived works] As with most complex formal artifacts (programs, spreadsheets, etc.), we confidently expect that few users will create new protocols from an entirely blank slate.  
+Instead, many will take an existing protocol, copy it, and edit the copy, possibly by copying and editing material from yet other protocols.  PAML must support this mode of operation.  
+Key issues here are determining which component structures can be incorporated by reference, and which must be copied instead.  Tracking the relationship between an original protocol, and protocols that have branched from it would also be desirable, in order to support, for example, propagating fixes from a root protocol to others.
 
-\item[Protocol maintenance] Closely related to the tasks of ``Modification,'' and ``Derived works'' are the ongoing development, repair, and versioning of a protocol.
+\item[Protocol maintenance] Closely related to the tasks of ``Modification,'' and ``Derived works'', PAML also needs to be able to support the ongoing development, repair, and versioning of a protocol.
 
-\item[Execution] To enable replication, PAML must specify what it means to execute a protocol correctly.  This definition must support a wide range of degrees of lab automation, from entirely manual, to manual supported by some automated workstation to entirely robotic.  Specifically this involves giving a \emph{compositional} account of the execution semantics in which the meaning of the protocol is a function of its component actions and the relationships between them.  This also involves supporting \emph{translation} from PAML to alternative representations for different uses.  For example, an initial PAML proof-of-concept translates PAML to Markdown\footnote{\url{https://github.com/SD2E/paml} for the translator, \url{https://commonmark.org/} gives the Markdown spec.} for labs operated by technicians, and an initial translation to Autoprotocol\footnote{\url{autoprotocol.org}} for wholly robotic laboratories using that control standard.
+\item[Verification] Authoring a formal protocol, in PAML or otherwise, requires substantial care and effort, and the usefulness of the protocol can be compromised if its specification is ill-formed or erroneous.  
+Supporting protocol authors in achieving correctness is an important goal. 
+Some of this will fall onto the shoulders of those building PAML support tools, however the specification itself must provide guidance as to what it means for a protocol to be complete, consistent, etc.
+
+\item[Planning and scheduling] Laboratory resources are valuable, and some organizations will want to be able to optimize their use. 
+To do so, PAML should support (at least) extraction of resource requirements from activities in the protocol, and estimated durations.  Note that \emph{what} resource requirements and duration estimates are required will likely be a function of both the protocol and the lab.  
+Which resources are limited, and must be considered in a planner or scheduler, versus those that can be effectively treated as unlimited, will vary by lab.  Management styles will also vary between organizations.
 
 \end{description}
+
+\subsection{Implementation Approach and Scope}
 
 Where possible, PAML builds on other existing standards.
 In particular, PAML uses the Unified Modeling Language (UML) version 2.5.1~\citep{uml251} to describe the organization of actions in a protocol, the Synthetic Biology Open Language (SBOL) version 3~\citep{SBOL3} to describe biological materials in terms of combinations of strains, media, etc., and uses the Ontology of Units of Measure (OM)~\citep{om2} to describe parameters with physical units.
@@ -40,12 +59,4 @@ As a foundation, PAML uses existing Semantic Web practices and resources, such a
 and to provide serialization formats for encoding this information in electronic data files, as well as the SBOL approach to closure in reasoning about knowledge.
 This approach also allows PAML to be extended with additional custom information for particular uses and deployments.
 
-Note, however, that PAML intentionally does not provide explicit guarantees about transfer or replicability of protocol executions. 
-Likewise, PAML is agnostic to any details of computer networking used to discover or share protocols.
-PAML focuses only on representing the minimal information required for an unambiguous specification of what is believed to be important in the execution of a protocol.
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "paml"
-%%% End:
+Note that PAML is intentionally agnostic to any details of computer networking used to discover, share, or otherwise operate with protocols, in order to maximize flexibility in available options for implementation of such services.
