@@ -59,12 +59,24 @@
 \newcommand{\pamlheading}[1]{\texttt{#1}}
 
 % Use sbol when you are referencing an SBOL data model class/field in text.
-\newcommand{\paml}[1]{\texttt{\hyperref[sec:#1]{#1}}}
+\newcommand{\paml}[1]{\texttt{\hyperref[sec:paml:#1]{#1}}}
 
 % Use sbolmult for SBOL fields that appear in multiple classes, for example
 % \sbolmult{types:CD}{types}. This ensures the reference links to the correct
 % section.
-\newcommand{\pamlmult}[2]{\texttt{\hyperref[sec:#1]{#2}}}
+\newcommand{\pamlmult}[2]{\texttt{\hyperref[sec:paml:#1]{#2}}}
+
+% Use sbolheading when you are referencing an SBOL data model class/field in a
+% section heading.
+\newcommand{\umlheading}[1]{\texttt{#1}}
+
+% Use sbol when you are referencing an SBOL data model class/field in text.
+\newcommand{\uml}[1]{\texttt{\hyperref[sec:uml:#1]{#1}}}
+
+% Use sbolmult for SBOL fields that appear in multiple classes, for example
+% \sbolmult{types:CD}{types}. This ensures the reference links to the correct
+% section.
+\newcommand{\umlmult}[2]{\texttt{\hyperref[sec:uml:#1]{#2}}}
 
 % Use sbol when you are using a class borrowed from SBOL, this will prepend the "sbol:" prefix as well
 \newcommand{\sbol}[1]{\texttt{\hyperref[sec:sbol:#1]{sbol:#1}}}
