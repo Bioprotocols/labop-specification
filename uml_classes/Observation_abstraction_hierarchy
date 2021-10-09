@@ -1,0 +1,14 @@
+digraph Observation {
+	sbol_Identified -> uml_Observation [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	uml_Observation [label="{uml:Observation|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	uml_Observation -> uml_TimeObservation [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	uml_TimeObservation [label="{uml:TimeObservation|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	uml_TimeObservation -> sbol_Identified [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:timeObservationValue [1..1]"]
+	uml_TimeObservation -> uml_OrderedPropertyValue [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:firstEventValue [1..1]"]
+	uml_OrderedPropertyValue [label="{uml:OrderedPropertyValue|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	uml_Observation -> uml_DurationObservation [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	uml_DurationObservation [label="{uml:DurationObservation|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	uml_DurationObservation -> sbol_Identified [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:durationObservationValue [1..2]"]
+	uml_DurationObservation -> uml_OrderedPropertyValue [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:firstEventValue [0..2]"]
+}

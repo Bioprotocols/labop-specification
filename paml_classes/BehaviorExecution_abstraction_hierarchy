@@ -1,0 +1,18 @@
+digraph BehaviorExecution {
+	prov_Activity -> paml_BehaviorExecution [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	prov_Activity [label="{prov:Activity|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_BehaviorExecution [label="{paml:BehaviorExecution|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_BehaviorExecution -> paml_ProtocolExecution [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	paml_ProtocolExecution [label="{paml:ProtocolExecution|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ProtocolExecution -> paml_ActivityEdgeFlow [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:flow [0..*]"]
+	paml_ActivityEdgeFlow [label="{paml:ActivityEdgeFlow|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ProtocolExecution -> paml_Protocol [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:protocol [1..1]"]
+	paml_Protocol [label="{paml:Protocol|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ProtocolExecution -> paml_ActivityNodeExecution [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:execution [0..*]"]
+	paml_ActivityNodeExecution [label="{paml:ActivityNodeExecution|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_BehaviorExecution -> paml_Material [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:consumedMaterial [0..*]"]
+	paml_Material [label="{paml:Material|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_BehaviorExecution -> paml_ParameterValue [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:parameterValuePair [0..*]"]
+	paml_ParameterValue [label="{paml:ParameterValue|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_BehaviorExecution [label="{paml:BehaviorExecution|paml:completedNormally [1..1]: boolean\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

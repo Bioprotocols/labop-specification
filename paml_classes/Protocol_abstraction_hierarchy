@@ -1,0 +1,5 @@
+digraph Protocol {
+	uml_Activity -> paml_Protocol [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	uml_Activity [label="{uml:Activity|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_Protocol [label="{paml:Protocol|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

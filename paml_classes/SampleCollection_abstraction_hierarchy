@@ -1,0 +1,12 @@
+digraph SampleCollection {
+	sbol_Identified -> paml_SampleCollection [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_SampleCollection [label="{paml:SampleCollection|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_SampleCollection -> paml_SampleArray [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	paml_SampleArray [label="{paml:SampleArray|paml:contents [1..1]: string\lpaml:containerType [1..1]: URI\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_SampleCollection -> paml_SampleMask [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	paml_SampleMask [label="{paml:SampleMask|paml:mask [1..1]: string\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_SampleMask -> paml_SampleCollection [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:source [1..1]"]
+	paml_SampleArray [label="{paml:SampleArray|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_SampleMask [label="{paml:SampleMask|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}
