@@ -1,0 +1,7 @@
+digraph OrderedPropertyValue {
+	sbol_Identified -> uml_OrderedPropertyValue [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	uml_OrderedPropertyValue [label="{uml:OrderedPropertyValue|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	uml_OrderedPropertyValue -> sbol_Identified [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:propertyValue [1..1]"]
+	uml_OrderedPropertyValue [label="{uml:OrderedPropertyValue|uml:indexValue [1..1]: integer\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

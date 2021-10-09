@@ -1,0 +1,9 @@
+digraph SampleData {
+	sbol_Identified -> paml_SampleData [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_SampleData [label="{paml:SampleData|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_SampleData -> xsd_string [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:sampleDataValues [1..1]"]
+	xsd_string [label="{xsd:string|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_SampleData -> paml_SampleCollection [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:fromSamples [1..1]"]
+	paml_SampleCollection [label="{paml:SampleCollection|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

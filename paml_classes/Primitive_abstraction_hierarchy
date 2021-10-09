@@ -1,0 +1,5 @@
+digraph Primitive {
+	uml_Behavior -> paml_Primitive [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	uml_Behavior [label="{uml:Behavior|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_Primitive [label="{paml:Primitive|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

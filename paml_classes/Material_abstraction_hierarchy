@@ -1,0 +1,9 @@
+digraph Material {
+	sbol_Identified -> paml_Material [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_Material [label="{paml:Material|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_Material -> om_Measure [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:amount [1..1]"]
+	om_Measure [label="{om:Measure|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_Material -> sbol_TopLevel [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:specification [1..1]"]
+	sbol_TopLevel [label="{sbol:TopLevel|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}

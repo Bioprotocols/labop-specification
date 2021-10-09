@@ -66,6 +66,18 @@
 % section.
 \newcommand{\pamlmult}[2]{\texttt{\hyperref[sec:paml:#1]{#2}}}
 
+% Use sbolheading when you are referencing an SBOL data model class/field in a
+% section heading.
+\newcommand{\umlheading}[1]{\texttt{uml:#1}}
+
+% Use sbol when you are referencing an SBOL data model class/field in text.
+\newcommand{\uml}[1]{\texttt{\hyperref[sec:uml:#1]{uml:#1}}}
+
+% Use sbolmult for SBOL fields that appear in multiple classes, for example
+% \sbolmult{types:CD}{types}. This ensures the reference links to the correct
+% section.
+\newcommand{\umlmult}[2]{\texttt{\hyperref[sec:uml:#1]{uml:#2}}}
+
 % Use sbol when you are using a class borrowed from SBOL, this will prepend the "sbol:" prefix as well
 \newcommand{\sbol}[1]{\texttt{\hyperref[sec:sbol:#1]{sbol:#1}}}
 
@@ -95,9 +107,6 @@
 
 % Rarely used. Use refObj you want to put the field in angle brackets.
 \newcommand{\refObj}[1]{$\langle$#1$\rangle$}
-
-% Use uml when you are using a class borrowed from UML, this will prepend the "uml:" prefix as well
-\newcommand{\uml}[1]{\texttt{\hyperref[sec:uml:#1]{uml:#1}}}
 
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}

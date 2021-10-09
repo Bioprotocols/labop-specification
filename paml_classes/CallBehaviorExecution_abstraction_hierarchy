@@ -1,0 +1,14 @@
+digraph CallBehaviorExecution {
+	sbol_Identified -> paml_ActivityNodeExecution [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ActivityNodeExecution -> paml_ActivityEdgeFlow [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:incomingFlow [0..*]"]
+	paml_ActivityEdgeFlow [label="{paml:ActivityEdgeFlow|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ActivityNodeExecution -> uml_ActivityNode [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:node [1..1]"]
+	uml_ActivityNode [label="{uml:ActivityNode|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ActivityNodeExecution [label="{paml:ActivityNodeExecution|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ActivityNodeExecution -> paml_CallBehaviorExecution [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
+	paml_ActivityNodeExecution [label="{paml:ActivityNodeExecution|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_CallBehaviorExecution -> paml_BehaviorExecution [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:call [1..1]"]
+	paml_BehaviorExecution [label="{paml:BehaviorExecution|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_CallBehaviorExecution [label="{paml:CallBehaviorExecution|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+}
