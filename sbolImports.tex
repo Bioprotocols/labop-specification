@@ -5,7 +5,7 @@
 PAML builds on the Synthetic Biology Open Language (SBOL) version 3~\citep{SBOL3} in several ways:
 \begin{itemize}
 \item PAML uses the same conventions as SBOL for URIs and types.
-\item PAML uses the SBOL base classes \sbol{Identified} and \sbol{TopLevel} as parents for all paml classes.
+\item PAML uses the SBOL base classes \sbol{Identified} and \sbol{TopLevel} as parents for all PAML classes.
 \item PAML uses SBOL classes to describe biological samples in terms of combinations of strains, media, etc.
 \item PAML makes use of the same external measurement ontology as SBOL, the Ontology of Units of Measure (OM)~\citep{om2}.
 \end{itemize}
@@ -26,17 +26,17 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
  \item A \sbol{TopLevel} URL MUST use the following pattern:
   \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \sbol{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path.
   
-  	For example, a \paml{ProtocolInterface} might have the URL~\path{https://igem.org/protocols/OD/calibration_2018}, where \texttt{namespace} is \path{https://igem.org}, \texttt{local} is \path{protocols/OD}, and \sbol{displayId} is \path{calibration_2018}.
+  	For example, a \paml{Protocol} might have the URL~\path{https://igem.org/protocols/OD/calibration_2018}, where \texttt{namespace} is \path{https://igem.org}, \texttt{local} is \path{protocols/OD}, and \sbol{displayId} is \path{calibration_2018}.
 
   \item A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object.
   
-  	For example, the \path{run102} \paml{ExperimentalRequest} object cannot have a URL of \path{https://igem.org/protocols/OD/calibration_2018/run102}, since the \path{https://igem.org/protocols/OD/calibration_2018} prefix is already used as a URL for the \path{calibration_2018} \paml{ProtocolInterface} object.
+  	For example, the \path{run102} \paml{ProtocolExecution} object cannot have a URL of \path{https://igem.org/protocols/OD/calibration_2018/run102}, since the \path{https://igem.org/protocols/OD/calibration_2018} prefix is already used as a URL for a \paml{Protocol} object.
 
   \item The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object.
 	Multiple layers of child objects are allowed using the same\\ \texttt{[parent]/[displayId]} pattern recursively.
 	
-	For example, a \paml{MeasurementType} object owned by the \path{calibration_2018} \paml{ProtocolInterface} and having a \sbol{displayId} of \texttt{MeasurementType1} will have a URL of \path{https://igem.org/protocols/OD/calibration_2018/MeasurementType1}.
-	Similarly, if the \texttt{MeasurementType1} object has a \paml{TimeInterval} child object with a \sbol{displayId} of \texttt{TimeInterval1}, then that object will have the URL\\ \path{https://igem.org/protocols/OD/calibration_2018/MeasurementType1/TimeInterval1}.
+	For example, a \uml{CallBehaviorAction} object owned by the \path{calibration_2018} \paml{Protocol} and having a \sbol{displayId} of \texttt{CallBehaviorAction1} will have a URL of \path{https://igem.org/protocols/OD/calibration_2018/CallBehaviorAction1}.
+	Similarly, if the \texttt{CallBehaviorAction1} object has a \uml{InputPin} child object with a \sbol{displayId} of \texttt{InputPin1}, then that object will have the URL\\ \path{https://igem.org/protocols/OD/calibration_2018/CallBehaviorAction1/InputPin1}.
   \end{itemize}
 
 \subsubsection{Compliant URIs}
@@ -53,10 +53,10 @@ The \refObj{namespace} token MAY further decompose into \refObj{domain}/\refObj{
 
 Consider, for example, the SBOL-compliant \paml{URI}:
 \begin{quote}``https://igem.org/engineering/protocols/platereader/OD/calibration\_2018''\end{quote} 
-for a \sbol{Component} with a \sbol{hasNamespace} value ``https://igrem.org/engineering/protocols''.
+for a \sbol{Component} with a \sbol{hasNamespace} value ``https://igem.org/engineering/protocols''.
 This \paml{URI} can be decomposed as follows:
 \begin{quote} 
-namespace: ``https://igrem.org/engineering/protocols'' \linebreak
+namespace: ``https://igem.org/engineering/protocols'' \linebreak
 domain: ``https://igem.org'' \linebreak
 root: ``engineering/protocols'' \linebreak
 collection: ``platereader/OD'' \linebreak
@@ -66,17 +66,21 @@ displayId: ``calibration\_2018'' \linebreak
 SBOL-compliant URIs also facilitate auto-construction of child objects with unique \paml{URI}s. 
 Child objects of \sbol{TopLevel} objects with compliant \paml{URI}s MUST conform to the following pattern:\\ ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the URI of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. 
 The \refObj{child\_type\_counter} of a new object SHOULD be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_uri}/Parameter7''). 
-Note that numbering is independent for each type, so a \paml{ProtocolInterface} can have children ``Parameter7'' and ``MeasurementType7''.
+Note that numbering is independent for each type, so a \paml{Protocol} can have children ``CallBehaviorAction7'' and ``ControlFlow7''.
 
 \subsection{PAML URIs}
  \label{sec:pamlURIs}
   
-The PAML namespace, which is \url{http://bioprotocols.org/paml/v1\#}, is used to indicate which entities and properties in an PAML document are defined by PAML. 
-For example, the URI of the type \paml{ProtocolInterface} is \url{http://bioprotocols.org/paml/v1\#ProtocolInterface}. 
-This convention is assumed throughout the specification.
-The PAML namespace MUST NOT be used for any entities or properties not defined in this specification.  
+\todo[inline]{The actual ontology implementations aren't currently versioned correctly, per \url{https://github.com/SD2E/paml/issues/59}}
 
-Other namespaces are also used by PAML, however, notably the SBOL 3 namespace \url{http://sbols.org/v3\#}, as well as other namespaces used by SBOL including Dublin Core~\citep{dcmi2012}), Ontology of Units of Measure (OM), and various biological ontologies.
+The PAML namespace, which is \url{http://bioprotocols.org/paml/v1\#}, is used to indicate which entities and properties in an PAML document are defined by PAML. 
+For example, the URI of the type \paml{Protocol} is \url{http://bioprotocols.org/paml/v1\#Protocol}. 
+This convention is assumed throughout the specification.
+The PAML namespace MUST NOT be used for any entities or properties not defined in this specification.
+
+Likewise, because no suitable ontology previously existed for UML 2.5.1~\citep{uml251}, the subset used by PAML is defined within a sibling namespace, \url{http://bioprotocols.org/uml/v251\#}
+
+Other namespaces are also used by PAML, however, notably the SBOL 3 namespace \url{http://sbols.org/v3\#}, as well as other namespaces used by SBOL including Dublin Core~\citep{dcmi2012}), the PROV-O ontology (\url{https://www.w3.org/ns/prov#}), Ontology of Units of Measure (OM), and various biological ontologies.
 
 
 \subsection{Primitive Data Types}
@@ -111,9 +115,17 @@ In addition to the simple types listed above, PAML also uses objects with types 
 \subsection{PAML Types}
 \label{sec:pamlTypes}
 
-All PAML objects are given the most specific \external{rdfType} in the PAML namespace (\uri{http://bioprotocols.org/paml/v1\#}) that defines the type of the object.  Namely, an object MUST have no more than one \external{rdfType} property in the \uri{http://bioprotocols.org/paml/v1\#} namespace.
+All PAML objects are given the most specific \external{rdfType} in the PAML namespace (\uri{http://bioprotocols.org/paml/v1\#}) that defines the type of the object.  
+Likewise, properties in the PAML namespace should only be used by objects with a PAML \external{rdfType}.
 
-For example, an object cannot have both the \external{rdfType} of \paml{ProtocolInterface} and \paml{MeasurementType}.  Also, a \paml{MeasureParameter} would have this \external{rdfType} and not also include \external{rdfType}s for classes that it inherits from, such as \paml{Parameter} and \sbol{Identified}.
+\todo[inline]{We should consider whether we want to maintain this, given UML's love for mix-in classes}
+PAML does not use multiple inheritance: all PAML classes are disjoint except with respect to their abstract parent classes.
+Accordingly, an object MUST NOT be given two \external{rdfType} properties referring to disjoint classes in the PAML namespace.
+An object MAY have redundant \external{rdfType} properties for its parent types, but this is NOT RECOMMENDED.
+
+For example, an object cannot have both the \external{rdfType} of \paml{Protocol} and \paml{SampleCollection}.  Also, a \paml{Protocol} would have this \external{rdfType} and not also include \external{rdfType}s for classes that it inherits from, such as \uml{Activity} and \sbol{Identified}.
+
+The same rules apply to the UML namespace, the SBOL namespace, and all unions thereof.
 
 
 \subsection{Object Closure and Document Composition}
@@ -132,14 +144,14 @@ For example, if a document has one value for an object's \sbol{displayId}, then 
 
 We further assume that any document containing an object also contains all of its child objects.
 In other words, the fundamental unit of PAML documents is the \sbol{TopLevel} object, and any document containing a \sbol{TopLevel} also contains the complete set of information necessary to describe that \sbol{TopLevel}---but not necessarily any other \sbol{TopLevel} objects that it refers to.
-For example, a document containing an \paml{ExperimentalRequest} describing a request to execute a protocol is guaranteed to contain every \paml{ParameterValue} for the request, but the document might not contain the \paml{ProtocolInterface} to which the request is being sent.
+For example, a document containing an \paml{ProtocolExecution} describing the execution of a protocol is guaranteed to contain every \paml{ActivityEdgeFlow} for the execution, but the document might not contain the \paml{Protocol} that was executed.
 
 A PAML document thus cleaves naturally along the boundaries of \sbol{TopLevel} objects, implying the following set of rules of fragmentation and composition of documents:
 \begin{itemize}
-\item Any subset of \sbol{TopLevel} objects in a valid paml document is also a valid paml document.
-\item Any disjoint set of \sbol{TopLevel} objects from different paml documents MAY be composed to form a new paml document. The result is not guaranteed to be valid, however, since the composition may expose problems due to the relationships between \sbol{TopLevel} objects from different documents.
-\item If two \sbol{TopLevel} objects in different paml documents have the same identity and and both they and their child objects contain equivalent sets of property assertions, then they MAY be treated as identical and freely merged. 
-\item  If two \sbol{TopLevel} objects in different paml documents have the same identity but different property values, then they MUST be considered different (possibly conflicting) versions, and any merger managed through some version control process.
+\item Any subset of \sbol{TopLevel} objects in a valid PAML document is also a valid PAML document.
+\item Any disjoint set of \sbol{TopLevel} objects from different PAML documents MAY be composed to form a new PAML document. The result is not guaranteed to be valid, however, since the composition may expose problems due to the relationships between \sbol{TopLevel} objects from different documents.
+\item If two \sbol{TopLevel} objects in different PAML documents have the same identity and and both they and their child objects contain equivalent sets of property assertions, then they MAY be treated as identical and freely merged. 
+\item  If two \sbol{TopLevel} objects in different PAML documents have the same identity but different property values, then they MUST be considered different (possibly conflicting) versions, and any merger managed through some version control process.
 \end{itemize}
 
 
@@ -264,14 +276,61 @@ The \sbol{hasModel} property MAY have any number of \paml{URI}s, each referencin
 \\{\em This is not typically required for specifying protocols in PAML.}
 \end{itemize}
 
-\subsection{TODO: PROV-O imports}
-\todo[inline]{Add PROV-O imports here}
+\subsection{PROV-O}
+
+The PROV-O ontology (\url{https://www.w3.org/ns/prov#}) defines a complementary data model that is leveraged by PAML to describe provenance.
+PAML builds on PROV-O to represent the execution of \paml{Protocol} workflows and the \paml{Primitive} behaviors that they comprise.
+A subset of PROV-O, already adapted for use with SBOL, is used for this purpose by PAML as well.
+
+The key class used is \prov{Activity}, which serves as a parent class for \paml{BehaviorExecution} records, along with \prov{Association} and \prov{Agent}, which are used to record the entity carrying out an execution.
+We repeat here only the key portions referenced in this specification.
+
+\subsubsection{prov:Activity}
+\label{sec:prov:Activity}
+
+An \prov{Activity} is used to describe how different \prov{Agent}s and other entities were used. An \prov{Activity} is linked through a \prov{qualifiedAssociation} to \prov{Association}s, to describe the role of agents.
+Each \prov{Activity} includes optional \prov{startedAtTime} and \prov{endedAtTime} properties. 
+
+\begin{itemize}
+\item \label{sec:type:Activity}
+An \prov{Activity} MAY have one or more \pamlmult{type:Activity}{type} properties, each of type \paml{URI} that explicitly specifies the type of the provenance \prov{Activity} in more detail.
+
+\item \label{sec:prov:startedAtTime}
+The \prov{startedAtTime} property is OPTIONAL and contains a DateTime value, indicating when the activity started.  If this property is present, then the \prov{endedAtTime} property is REQUIRED.
+
+\item \label{sec:prov:endedAtTime}
+The \prov{endedAtTime} property is OPTIONAL and contains a DateTime value, indicating when the activity ended.
+
+\item \label{sec:prov:qualifiedAssociation}
+An \prov{Activity} MAY have one or more \prov{qualifiedAssociation} properties, each of type \sbol{URI} that refers to an \prov{Association} object.
+\end{itemize}
+
+\subsubsection{prov:Association}
+\label{sec:prov:Association}
+
+An \prov{Association} is linked to an \prov{Agent} through the \prov{agent} relationship. The \prov{Association} includes the \provmult{hadRole:A}{hadRole} property to qualify the role of the \prov{Agent} in the \prov{Activity}.
+
+\begin{itemize}
+\item \label{sec:prov:agent}
+The \prov{agent} property is REQUIRED and MUST contain a \paml{URI} that refers to an \prov{Agent} object.
+
+\item \label{sec:prov:hadRole:A}
+An \prov{Association} MAY have one or more \provmult{hadRole:A}{hadRole} properties, each of type \paml{URI} that refers to particular term(s) that describes the role of the \prov{Agent} in the parent \prov{Activity}. 
+\end{itemize}
+
+\subsubsection{prov:Agent}
+\label{sec:prov:Agent}
+
+Examples of agents are a person, organization, or software tool. 
+These agents should be annotated with additional information, such as software version, needed to be able to run the same \prov{Activity} again.
+
+
 
 \subsection{Ontology of Units of Measure}
 
 In most cases where a number is needed in PAML, that number is a measure with units associated with it.
 The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. 
-A subset of OM, already adopted by SBOL, is used for this purpose by PAML as well.
+A subset of OM, already adapted for use with SBOL, is used for this purpose by PAML as well.
 
 The key class used is \om{Measure}, which associates a number with a unit and a biology-related property.
 In most cases, it should be possible to use one of the \external{om:Unit} instances already defined by OM; when this is not possible, an appropriate unit can be defined using \external{om:Unit} and \external{om:Prefix} classes.

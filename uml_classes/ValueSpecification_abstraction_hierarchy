@@ -5,7 +5,7 @@ digraph ValueSpecification {
 	uml_ValueSpecification -> uml_LiteralSpecification [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
 	uml_LiteralSpecification [label="{uml:LiteralSpecification|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 	uml_ValueSpecification -> uml_Expression [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
-	uml_Expression [label="{uml:Expression|uml:symbolValue [0..1]: string\luml:isOrdered [1..1]: boolean\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	uml_Expression [label="{uml:Expression|uml:isOrdered [1..1]: boolean\luml:symbolValue [0..1]: string\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 	uml_Expression -> uml_OrderedPropertyValue [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:operandValue [0..*]"]
 	uml_OrderedPropertyValue [label="{uml:OrderedPropertyValue|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 	uml_ValueSpecification -> uml_TimeExpression [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
@@ -46,7 +46,7 @@ digraph ValueSpecification {
 	uml_TimeInterval -> uml_ValueSpecification [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:maxTimeValue [1..1]"]
 	uml_Interval -> uml_DurationInterval [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
 	uml_DurationInterval [label="{uml:DurationInterval|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
-	uml_DurationInterval -> uml_ValueSpecification [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:maxDurationValue [1..1]"]
 	uml_DurationInterval -> uml_ValueSpecification [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:minDurationValue [1..1]"]
+	uml_DurationInterval -> uml_ValueSpecification [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="uml:maxDurationValue [1..1]"]
 	uml_ValueSpecification [label="{uml:ValueSpecification|uml:type [0..1]: URI\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 }

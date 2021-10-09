@@ -2,8 +2,8 @@ digraph ParameterValue {
 	sbol_Identified -> paml_ParameterValue [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
 	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 	paml_ParameterValue [label="{paml:ParameterValue|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
-	paml_ParameterValue -> uml_LiteralSpecification [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:parameterValue [1..1]"]
-	uml_LiteralSpecification [label="{uml:LiteralSpecification|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 	paml_ParameterValue -> uml_Parameter [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:parameter [1..1]"]
 	uml_Parameter [label="{uml:Parameter|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ParameterValue -> uml_LiteralSpecification [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:parameterValue [1..1]"]
+	uml_LiteralSpecification [label="{uml:LiteralSpecification|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 }

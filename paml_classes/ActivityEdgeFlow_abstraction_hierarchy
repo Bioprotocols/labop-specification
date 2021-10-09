@@ -2,9 +2,9 @@ digraph ActivityEdgeFlow {
 	sbol_Identified -> paml_ActivityEdgeFlow [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
 	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 	paml_ActivityEdgeFlow [label="{paml:ActivityEdgeFlow|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
-	paml_ActivityEdgeFlow -> sbol_Identified [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:edgeValue [1..1]"]
-	paml_ActivityEdgeFlow -> uml_ActivityEdge [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:edge [0..1]"]
-	uml_ActivityEdge [label="{uml:ActivityEdge|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 	paml_ActivityEdgeFlow -> paml_ActivityNodeExecution [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:tokenSource [1..1]"]
 	paml_ActivityNodeExecution [label="{paml:ActivityNodeExecution|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ActivityEdgeFlow -> uml_ActivityEdge [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:edge [0..1]"]
+	uml_ActivityEdge [label="{uml:ActivityEdge|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ActivityEdgeFlow -> sbol_Identified [arrowhead=vee arrowtail=odiamond dir=both fontname="Bitstream Vera Sans" fontsize=8 xlabel="paml:edgeValue [1..1]"]
 }

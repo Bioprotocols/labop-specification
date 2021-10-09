@@ -54,11 +54,11 @@
 
 %Commands to format SBOL terms in the document
 
-% Use sbolheading when you are referencing an SBOL data model class/field in a
+% Use sbolheading when you are referencing a data model class/field in a
 % section heading.
 \newcommand{\pamlheading}[1]{\texttt{#1}}
 
-% Use sbol when you are referencing an SBOL data model class/field in text.
+% Use sbol when you are referencing a PAML data model class/field in text.
 \newcommand{\paml}[1]{\texttt{\hyperref[sec:paml:#1]{#1}}}
 
 % Use sbolmult for SBOL fields that appear in multiple classes, for example
@@ -149,8 +149,13 @@ Additional authors & from contributing organizations\\
 
 \input{sbolImports}
 
-\section{UML Imports}
+\section{Imported UML Classes}
 \label{sec:uml}
+
+PAML builds on the Unified Modeling Language (UML) version 2.5.1~\citep{uml251} to describe the organization of actions in a protocol.
+In order to make this document more self-contained, this section describes the classes from UML that have been imported for use with PAML.
+In particular, each such class has been adapted to be an SBOL subclass, assigned to either \sbol{Identified} or \sbol{TopLevel}, in order to be able to be used with SBOL closure assumptions in an RDF environment.
+
 \input{umlDataModel}
 
 \section{PAML Data Model}

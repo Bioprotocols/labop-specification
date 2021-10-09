@@ -2,5 +2,5 @@ digraph ContainerSpec {
 	sbol_Identified -> paml_ContainerSpec [arrowtail=empty dir=back fontname="Bitstream Vera Sans" fontsize=8]
 	sbol_Identified [label="{sbol:Identified|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 	paml_ContainerSpec [label="{paml:ContainerSpec|}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
-	paml_ContainerSpec [label="{paml:ContainerSpec|paml:queryString [1..1]: string\lpaml:prefixMap [1..1]: string\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
+	paml_ContainerSpec [label="{paml:ContainerSpec|paml:prefixMap [1..1]: string\lpaml:queryString [1..1]: string\l}" fontname="Bitstream Vera Sans" fontsize=8 shape=record]
 }
