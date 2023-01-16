@@ -47,7 +47,7 @@
 
 %Command to format the listings containing SBOL RDF/XML serialization examples
 \newcommand{\lstsetsbol}{
- \lstset{language=paml,
+ \lstset{language=labop,
         tabsize=2
  }
 }
@@ -56,15 +56,15 @@
 
 % Use sbolheading when you are referencing a data model class/field in a
 % section heading.
-\newcommand{\pamlheading}[1]{\texttt{#1}}
+\newcommand{\labopheading}[1]{\texttt{#1}}
 
-% Use sbol when you are referencing a PAML data model class/field in text.
-\newcommand{\paml}[1]{\texttt{\hyperref[sec:paml:#1]{#1}}}
+% Use sbol when you are referencing a LabOP data model class/field in text.
+\newcommand{\labop}[1]{\texttt{\hyperref[sec:labop:#1]{#1}}}
 
 % Use sbolmult for SBOL fields that appear in multiple classes, for example
 % \sbolmult{types:CD}{types}. This ensures the reference links to the correct
 % section.
-\newcommand{\pamlmult}[2]{\texttt{\hyperref[sec:paml:#1]{#2}}}
+\newcommand{\labopmult}[2]{\texttt{\hyperref[sec:labop:#1]{#2}}}
 
 % Use sbolheading when you are referencing an SBOL data model class/field in a
 % section heading.
@@ -116,11 +116,11 @@
 % -----------------------------------------------------------------------------
 
 \begin{document}
-\packageTitle{\latex PAML Specifications}
+\packageTitle{\latex LabOP Specifications}
 \packageVersion{Version 1.0-alpha}
 \packageVersionDate{TBD, 2021}
 
-\title{Protocol Activity Markup Language \texorpdfstring{\\[3pt]}{}\mbox{(PAML) Version~1.0.0-alpha}}
+\title{Laboratory Open Protocol language \texorpdfstring{\\[3pt]}{}\mbox{(LabOP) Version~1.0.0-alpha}}
 
 \author{
 \begin{tabular}{l>{\hspace*{15pt}}r}
@@ -152,20 +152,20 @@ Additional authors & from contributing organizations\\
 \section{Imported UML Classes}
 \label{sec:uml}
 
-PAML builds on the Unified Modeling Language (UML) version 2.5.1~\citep{uml251} to describe the organization of actions in a protocol.
-In order to make this document more self-contained, this section describes the classes from UML that have been imported for use with PAML.
+LabOP builds on the Unified Modeling Language (UML) version 2.5.1~\citep{uml251} to describe the organization of actions in a protocol.
+In order to make this document more self-contained, this section describes the classes from UML that have been imported for use with LabOP.
 In particular, each such class has been adapted to be an SBOL subclass, assigned to either \sbol{Identified} or \sbol{TopLevel}, in order to be able to be used with SBOL closure assumptions in an RDF environment.
 
 \input{umlDataModel}
 
-\section{PAML Data Model}
-\label{sec:paml}
-\input{pamlDataModel}
+\section{LabOP Data Model}
+\label{sec:labop}
+\input{labopDataModel}
 
 \input{serialization}
 
 \newpage
-\bibliography{paml}
+\bibliography{labop}
 
 \appendix
 

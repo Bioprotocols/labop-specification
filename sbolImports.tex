@@ -2,12 +2,12 @@
 \section{SBOL Imports: Identifiers, Primitive Types, and Classes}
 % -----------------------------------------------------------------------------
 
-PAML builds on the Synthetic Biology Open Language (SBOL) version 3~\citep{SBOL3} in several ways:
+LabOP builds on the Synthetic Biology Open Language (SBOL) version 3~\citep{SBOL3} in several ways:
 \begin{itemize}
-\item PAML uses the same conventions as SBOL for URIs and types.
-\item PAML uses the SBOL base classes \sbol{Identified} and \sbol{TopLevel} as parents for all PAML classes.
-\item PAML uses SBOL classes to describe biological samples in terms of combinations of strains, media, etc.
-\item PAML makes use of the same external measurement ontology as SBOL, the Ontology of Units of Measure (OM)~\citep{om2}.
+\item LabOP uses the same conventions as SBOL for URIs and types.
+\item LabOP uses the SBOL base classes \sbol{Identified} and \sbol{TopLevel} as parents for all LabOP classes.
+\item LabOP uses SBOL classes to describe biological samples in terms of combinations of strains, media, etc.
+\item LabOP makes use of the same external measurement ontology as SBOL, the Ontology of Units of Measure (OM)~\citep{om2}.
 \end{itemize}
 
 In order to make this document more self-contained, this section repeats the material from the SBOL specification on conventions and SBOL base classes.
@@ -17,7 +17,7 @@ In case of conflict between any material in this section and the SBOL specificat
 \subsection{Uniform Resource Identifiers}
 \label{sec:URIstructure}
 
-As PAML is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the PAML data model, the value of an association property MUST be a \paml{URI} or set of \paml{URI}s that refer to PAML objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \paml{URI} structure follows the recommended best practices for compliant \paml{URI}s specified in \ref{sec:compliant}.
+As LabOP is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the LabOP data model, the value of an association property MUST be a \labop{URI} or set of \labop{URI}s that refer to LabOP objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \labop{URI} structure follows the recommended best practices for compliant \labop{URI}s specified in \ref{sec:compliant}.
 
 Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
 
@@ -26,16 +26,16 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
  \item A \sbol{TopLevel} URL MUST use the following pattern:
   \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \sbol{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path.
   
-  	For example, a \paml{Protocol} might have the URL~\path{https://igem.org/protocols/OD/calibration_2018}, where \texttt{namespace} is \path{https://igem.org}, \texttt{local} is \path{protocols/OD}, and \sbol{displayId} is \path{calibration_2018}.
+  	For example, a \labop{Protocol} might have the URL~\path{https://igem.org/protocols/OD/calibration_2018}, where \texttt{namespace} is \path{https://igem.org}, \texttt{local} is \path{protocols/OD}, and \sbol{displayId} is \path{calibration_2018}.
 
   \item A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object.
   
-  	For example, the \path{run102} \paml{ProtocolExecution} object cannot have a URL of \path{https://igem.org/protocols/OD/calibration_2018/run102}, since the \path{https://igem.org/protocols/OD/calibration_2018} prefix is already used as a URL for a \paml{Protocol} object.
+  	For example, the \path{run102} \labop{ProtocolExecution} object cannot have a URL of \path{https://igem.org/protocols/OD/calibration_2018/run102}, since the \path{https://igem.org/protocols/OD/calibration_2018} prefix is already used as a URL for a \labop{Protocol} object.
 
   \item The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object.
 	Multiple layers of child objects are allowed using the same\\ \texttt{[parent]/[displayId]} pattern recursively.
 	
-	For example, a \uml{CallBehaviorAction} object owned by the \path{calibration_2018} \paml{Protocol} and having a \sbol{displayId} of \texttt{CallBehaviorAction1} will have a URL of \path{https://igem.org/protocols/OD/calibration_2018/CallBehaviorAction1}.
+	For example, a \uml{CallBehaviorAction} object owned by the \path{calibration_2018} \labop{Protocol} and having a \sbol{displayId} of \texttt{CallBehaviorAction1} will have a URL of \path{https://igem.org/protocols/OD/calibration_2018/CallBehaviorAction1}.
 	Similarly, if the \texttt{CallBehaviorAction1} object has a \uml{InputPin} child object with a \sbol{displayId} of \texttt{InputPin1}, then that object will have the URL\\ \path{https://igem.org/protocols/OD/calibration_2018/CallBehaviorAction1/InputPin1}.
   \end{itemize}
 
@@ -49,12 +49,12 @@ Compliant URIs for \sbol{TopLevel} objects MUST conform to the following pattern
 \refObj{namespace}/\refObj{collection\_structure}/\refObj{displayId}
 \end{quotation}
 
-The \refObj{namespace} token MAY further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \paml{URI}s can be automatically decomposed with the aid of a \sbol{TopLevel} object's \sbol{hasNamespace} property. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
+The \refObj{namespace} token MAY further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \labop{URI}s can be automatically decomposed with the aid of a \sbol{TopLevel} object's \sbol{hasNamespace} property. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
 
-Consider, for example, the SBOL-compliant \paml{URI}:
+Consider, for example, the SBOL-compliant \labop{URI}:
 \begin{quote}``https://igem.org/engineering/protocols/platereader/OD/calibration\_2018''\end{quote} 
 for a \sbol{Component} with a \sbol{hasNamespace} value ``https://igem.org/engineering/protocols''.
-This \paml{URI} can be decomposed as follows:
+This \labop{URI} can be decomposed as follows:
 \begin{quote} 
 namespace: ``https://igem.org/engineering/protocols'' \linebreak
 domain: ``https://igem.org'' \linebreak
@@ -63,24 +63,24 @@ collection: ``platereader/OD'' \linebreak
 displayId: ``calibration\_2018'' \linebreak
 \end{quote}
 
-SBOL-compliant URIs also facilitate auto-construction of child objects with unique \paml{URI}s. 
-Child objects of \sbol{TopLevel} objects with compliant \paml{URI}s MUST conform to the following pattern:\\ ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the URI of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. 
+SBOL-compliant URIs also facilitate auto-construction of child objects with unique \labop{URI}s. 
+Child objects of \sbol{TopLevel} objects with compliant \labop{URI}s MUST conform to the following pattern:\\ ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the URI of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. 
 The \refObj{child\_type\_counter} of a new object SHOULD be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_uri}/Parameter7''). 
-Note that numbering is independent for each type, so a \paml{Protocol} can have children ``CallBehaviorAction7'' and ``ControlFlow7''.
+Note that numbering is independent for each type, so a \labop{Protocol} can have children ``CallBehaviorAction7'' and ``ControlFlow7''.
 
-\subsection{PAML URIs}
- \label{sec:pamlURIs}
+\subsection{LabOP URIs}
+ \label{sec:labopURIs}
   
-\todo[inline]{The actual ontology implementations aren't currently versioned correctly, per \url{https://github.com/SD2E/paml/issues/59}}
+\todo[inline]{The actual ontology implementations aren't currently versioned correctly, per \url{https://github.com/SD2E/labop/issues/59}}
 
-The PAML namespace, which is \url{http://bioprotocols.org/paml/v1\#}, is used to indicate which entities and properties in an PAML document are defined by PAML. 
-For example, the URI of the type \paml{Protocol} is \url{http://bioprotocols.org/paml/v1\#Protocol}. 
+The LabOP namespace, which is \url{http://bioprotocols.org/labop/v1\#}, is used to indicate which entities and properties in an LabOP document are defined by LabOP. 
+For example, the URI of the type \labop{Protocol} is \url{http://bioprotocols.org/labop/v1\#Protocol}. 
 This convention is assumed throughout the specification.
-The PAML namespace MUST NOT be used for any entities or properties not defined in this specification.
+The LabOP namespace MUST NOT be used for any entities or properties not defined in this specification.
 
-Likewise, because no suitable ontology previously existed for UML 2.5.1~\citep{uml251}, the subset used by PAML is defined within a sibling namespace, \url{http://bioprotocols.org/uml/v251\#}
+Likewise, because no suitable ontology previously existed for UML 2.5.1~\citep{uml251}, the subset used by LabOP is defined within a sibling namespace, \url{http://bioprotocols.org/uml/v251\#}
 
-Other namespaces are also used by PAML, however, notably the SBOL 3 namespace \url{http://sbols.org/v3\#}, as well as other namespaces used by SBOL including Dublin Core~\citep{dcmi2012}), the PROV-O ontology (\url{https://www.w3.org/ns/prov#}), Ontology of Units of Measure (OM), and various biological ontologies.
+Other namespaces are also used by LabOP, however, notably the SBOL 3 namespace \url{http://sbols.org/v3\#}, as well as other namespaces used by SBOL including Dublin Core~\citep{dcmi2012}), the PROV-O ontology (\url{https://www.w3.org/ns/prov#}), Ontology of Units of Measure (OM), and various biological ontologies.
 
 
 \subsection{Primitive Data Types}
@@ -93,37 +93,37 @@ Other namespaces are also used by PAML, however, notably the SBOL 3 namespace \u
 \label{sec:URI}
 \label{sec:literal}
 
-When PAML uses simple ``primitive'' data types such as \paml{string}s or \paml{integer}s, these are defined as the following specific formal types:
+When LabOP uses simple ``primitive'' data types such as \labop{string}s or \labop{integer}s, these are defined as the following specific formal types:
 \begin{itemize}
-\item \paml{string}: \url{http://www.w3.org/2001/XMLSchema\#string}\\
+\item \labop{string}: \url{http://www.w3.org/2001/XMLSchema\#string}\\
   {\em Example: ``LacI coding sequence''}
-\item \paml{integer}: \url{http://www.w3.org/2001/XMLSchema\#integer}\\
+\item \labop{integer}: \url{http://www.w3.org/2001/XMLSchema\#integer}\\
   {\em Example: 3}
-\item \paml{long}: \url{http://www.w3.org/2001/XMLSchema\#long}\\
+\item \labop{long}: \url{http://www.w3.org/2001/XMLSchema\#long}\\
   {\em Example: 9223372036854775806}
-\item \paml{float}: \url{http://www.w3.org/2001/XMLSchema\#float}\\
+\item \labop{float}: \url{http://www.w3.org/2001/XMLSchema\#float}\\
   {\em Example: 3.14159}
-\item \paml{boolean}: \url{http://www.w3.org/2001/XMLSchema\#boolean}\\
+\item \labop{boolean}: \url{http://www.w3.org/2001/XMLSchema\#boolean}\\
   {\em Example: \external{true}}
 \end{itemize}
 
-The term \paml{literal} is used to denote an object that can be any of the five types listed above.
+The term \labop{literal} is used to denote an object that can be any of the five types listed above.
 
-In addition to the simple types listed above, PAML also uses objects with types \emph{Uniform Resource Identifier} (\paml{URI}). It is important to realize that in RDF, a \paml{URI} might or might not be a resolvable URL (web address).  A \paml{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
+In addition to the simple types listed above, LabOP also uses objects with types \emph{Uniform Resource Identifier} (\labop{URI}). It is important to realize that in RDF, a \labop{URI} might or might not be a resolvable URL (web address).  A \labop{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
 
 
-\subsection{PAML Types}
-\label{sec:pamlTypes}
+\subsection{LabOP Types}
+\label{sec:labopTypes}
 
-All PAML objects are given the most specific \external{rdfType} in the PAML namespace (\uri{http://bioprotocols.org/paml/v1\#}) that defines the type of the object.  
-Likewise, properties in the PAML namespace should only be used by objects with a PAML \external{rdfType}.
+All LabOP objects are given the most specific \external{rdfType} in the LabOP namespace (\uri{http://bioprotocols.org/labop/v1\#}) that defines the type of the object.  
+Likewise, properties in the LabOP namespace should only be used by objects with a LabOP \external{rdfType}.
 
 \todo[inline]{We should consider whether we want to maintain this, given UML's love for mix-in classes}
-PAML does not use multiple inheritance: all PAML classes are disjoint except with respect to their abstract parent classes.
-Accordingly, an object MUST NOT be given two \external{rdfType} properties referring to disjoint classes in the PAML namespace.
+LabOP does not use multiple inheritance: all LabOP classes are disjoint except with respect to their abstract parent classes.
+Accordingly, an object MUST NOT be given two \external{rdfType} properties referring to disjoint classes in the LabOP namespace.
 An object MAY have redundant \external{rdfType} properties for its parent types, but this is NOT RECOMMENDED.
 
-For example, an object cannot have both the \external{rdfType} of \paml{Protocol} and \paml{SampleCollection}.  Also, a \paml{Protocol} would have this \external{rdfType} and not also include \external{rdfType}s for classes that it inherits from, such as \uml{Activity} and \sbol{Identified}.
+For example, an object cannot have both the \external{rdfType} of \labop{Protocol} and \labop{SampleCollection}.  Also, a \labop{Protocol} would have this \external{rdfType} and not also include \external{rdfType}s for classes that it inherits from, such as \uml{Activity} and \sbol{Identified}.
 
 The same rules apply to the UML namespace, the SBOL namespace, and all unions thereof.
 
@@ -137,35 +137,35 @@ Documents are allowed to be fragmented and composed in an arbitrary manner, down
 This limits the ability to reason about properties of objects and validate the correctness of a model.
 For example, it would not be possible to validate that an \sbol{Identified} object has no more than one value for its \sbol{displayId} property, because it would not be possible to determine whether some other document somewhere in the world holds a second value for the property.
 
-SBOL addresses this by adding an object closure assumption that allows stronger reasoning about individual objects and their children, and PAML adopts this convention.
-For any given PAML document, if the document contains an \external{rdfType} statement regarding an \sbol{Identified} object $X$, then it is assumed that the document also contains all other property statements about object $X$ as well. 
+SBOL addresses this by adding an object closure assumption that allows stronger reasoning about individual objects and their children, and LabOP adopts this convention.
+For any given LabOP document, if the document contains an \external{rdfType} statement regarding an \sbol{Identified} object $X$, then it is assumed that the document also contains all other property statements about object $X$ as well. 
 This enables strong validation rules, since any statement of the form ``$X$ {\it predicate} $Y$'' that is not present can be assumed to be false.
 For example, if a document has one value for an object's \sbol{displayId}, then it is valid to conclude that there are no other \sbol{displayId} values, and thus its "zero or one" cardinality requirement is satisfied.
 
 We further assume that any document containing an object also contains all of its child objects.
-In other words, the fundamental unit of PAML documents is the \sbol{TopLevel} object, and any document containing a \sbol{TopLevel} also contains the complete set of information necessary to describe that \sbol{TopLevel}---but not necessarily any other \sbol{TopLevel} objects that it refers to.
-For example, a document containing an \paml{ProtocolExecution} describing the execution of a protocol is guaranteed to contain every \paml{ActivityEdgeFlow} for the execution, but the document might not contain the \paml{Protocol} that was executed.
+In other words, the fundamental unit of LabOP documents is the \sbol{TopLevel} object, and any document containing a \sbol{TopLevel} also contains the complete set of information necessary to describe that \sbol{TopLevel}---but not necessarily any other \sbol{TopLevel} objects that it refers to.
+For example, a document containing an \labop{ProtocolExecution} describing the execution of a protocol is guaranteed to contain every \labop{ActivityEdgeFlow} for the execution, but the document might not contain the \labop{Protocol} that was executed.
 
-A PAML document thus cleaves naturally along the boundaries of \sbol{TopLevel} objects, implying the following set of rules of fragmentation and composition of documents:
+A LabOP document thus cleaves naturally along the boundaries of \sbol{TopLevel} objects, implying the following set of rules of fragmentation and composition of documents:
 \begin{itemize}
-\item Any subset of \sbol{TopLevel} objects in a valid PAML document is also a valid PAML document.
-\item Any disjoint set of \sbol{TopLevel} objects from different PAML documents MAY be composed to form a new PAML document. The result is not guaranteed to be valid, however, since the composition may expose problems due to the relationships between \sbol{TopLevel} objects from different documents.
-\item If two \sbol{TopLevel} objects in different PAML documents have the same identity and and both they and their child objects contain equivalent sets of property assertions, then they MAY be treated as identical and freely merged. 
-\item  If two \sbol{TopLevel} objects in different PAML documents have the same identity but different property values, then they MUST be considered different (possibly conflicting) versions, and any merger managed through some version control process.
+\item Any subset of \sbol{TopLevel} objects in a valid LabOP document is also a valid LabOP document.
+\item Any disjoint set of \sbol{TopLevel} objects from different LabOP documents MAY be composed to form a new LabOP document. The result is not guaranteed to be valid, however, since the composition may expose problems due to the relationships between \sbol{TopLevel} objects from different documents.
+\item If two \sbol{TopLevel} objects in different LabOP documents have the same identity and and both they and their child objects contain equivalent sets of property assertions, then they MAY be treated as identical and freely merged. 
+\item  If two \sbol{TopLevel} objects in different LabOP documents have the same identity but different property values, then they MUST be considered different (possibly conflicting) versions, and any merger managed through some version control process.
 \end{itemize}
 
 
 \subsection{SBOL Classes}
 
-PAML classes use \sbol{Identified} and \sbol{TopLevel} as their root classes.
-PAML also uses \sbol{Component} to describe biological materials such as strains, reagents, genetic constructs, and media.
-This subsection summarizes the minimum information required to use these SBOL classes in PAML; for full details, see the Synthetic Biology Open Language (SBOL) version 3 specification~\citep{SBOL3}
+LabOP classes use \sbol{Identified} and \sbol{TopLevel} as their root classes.
+LabOP also uses \sbol{Component} to describe biological materials such as strains, reagents, genetic constructs, and media.
+This subsection summarizes the minimum information required to use these SBOL classes in LabOP; for full details, see the Synthetic Biology Open Language (SBOL) version 3 specification~\citep{SBOL3}
 
 \subsubsection{sbol:Identified}
 \label{sec:sbol:Identified}
 
-All PAML- and SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
-This inheritance means that all PAML and SBOL objects are uniquely identified using \paml{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
+All LabOP- and SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
+This inheritance means that all LabOP and SBOL objects are uniquely identified using \labop{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
 
 As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{displayId},  \sbol{name}, \sbol{description}, \prov{wasDerivedFrom}, and \prov{wasGeneratedBy}. 
 
@@ -179,32 +179,32 @@ As shown in \ref{uml:identified}, the \sbol{Identified} class includes the follo
 
 \begin{itemize}
 \item \label{sec:sbol:displayId} 
-The \sbol{displayId} property is an OPTIONAL identifier with a data type of \paml{string} (and REQUIRED for objects with URL identifiers). This property is intended to be an intermediate between a URI and the \sbol{name} property that is machine-readable, but more human-readable than the full URI of an object.
-If set, its \paml{string} value MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
+The \sbol{displayId} property is an OPTIONAL identifier with a data type of \labop{string} (and REQUIRED for objects with URL identifiers). This property is intended to be an intermediate between a URI and the \sbol{name} property that is machine-readable, but more human-readable than the full URI of an object.
+If set, its \labop{string} value MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
 
 \item \label{sec:sbol:name}
-The \sbol{name} property is OPTIONAL and has a data type of \paml{string}. This property is intended to be displayed to a human when visualizing an \sbol{Identified} object.
+The \sbol{name} property is OPTIONAL and has a data type of \labop{string}. This property is intended to be displayed to a human when visualizing an \sbol{Identified} object.
 If an \sbol{Identified} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or URI.
 
 \item \label{sec:sbol:description}
-The \sbol{description} property is OPTIONAL and has a data type of \paml{string}. This property is intended to contain a more thorough text description of an \sbol{Identified} object.
+The \sbol{description} property is OPTIONAL and has a data type of \labop{string}. This property is intended to contain a more thorough text description of an \sbol{Identified} object.
 
 \item \label{sec:prov:wasDerivedFrom}
-The \prov{wasDerivedFrom} property MAY contain any number of \paml{URI}s. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace.
+The \prov{wasDerivedFrom} property MAY contain any number of \labop{URI}s. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace.
 
 \item \label{sec:prov:wasGeneratedBy}
-The \prov{wasGeneratedBy} property MAY contain any number of \paml{URI}s. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace.
+The \prov{wasGeneratedBy} property MAY contain any number of \labop{URI}s. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace.
 
 \item \label{sec:sbol:hasMeasure}
-The \sbol{hasMeasure} property MAY contain any number of \paml{URI}s, each of which refers to a \om{Measure} object that describes a measured parameter for this object.
+The \sbol{hasMeasure} property MAY contain any number of \labop{URI}s, each of which refers to a \om{Measure} object that describes a measured parameter for this object.
 \end{itemize}
 
 \subsubsection{sbol:TopLevel}
 \label{sec:sbol:TopLevel}
 
-\sbol{TopLevel} is an abstract class that is extended by any \sbol{Identified} class that can be found at the top level of a PAML or SBOL document or file.
+\sbol{TopLevel} is an abstract class that is extended by any \sbol{Identified} class that can be found at the top level of a LabOP or SBOL document or file.
 In other words, \sbol{TopLevel} objects are never nested inside of any other object as a child object.
-The \sbol{TopLevel} classes defined in PAML are \paml{Protocol} and \paml{Primitive}. 
+The \sbol{TopLevel} classes defined in LabOP are \labop{Protocol} and \labop{Primitive}. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -216,12 +216,12 @@ The \sbol{TopLevel} classes defined in PAML are \paml{Protocol} and \paml{Primit
 
 \begin{itemize}
 \item \label{sec:sbol:hasNamespace}
-The \sbol{hasNamespace} property is REQUIRED and MUST contain a single \paml{URI} that defines the namespace portion of URLs for this object and any child objects.
+The \sbol{hasNamespace} property is REQUIRED and MUST contain a single \labop{URI} that defines the namespace portion of URLs for this object and any child objects.
 If the URI for the \sbol{TopLevel} object is a URL, then the URI of the \sbol{hasNamespace} property MUST prefix match that URL.
 
 \item 
 \label{sec:sbol:hasAttachment}
-The \sbol{hasAttachment} property MAY have any number of \paml{URI}s, each referring to an \external{sbol:Attachment} object.
+The \sbol{hasAttachment} property MAY have any number of \labop{URI}s, each referring to an \external{sbol:Attachment} object.
 \end{itemize}
 
 
@@ -229,10 +229,10 @@ The \sbol{hasAttachment} property MAY have any number of \paml{URI}s, each refer
 \label{sec:sbol:Component}
 
 The \sbol{Component} class represents the structural and/or functional entities of a biological design. 
-In PAML, this is primarily used to represent the design of experimental samples as combinations of entities such as strains, genetic constructs, media, inducers, etc.
+In LabOP, this is primarily used to represent the design of experimental samples as combinations of entities such as strains, genetic constructs, media, inducers, etc.
 
 As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using a number of different properties.
-In many PAML usages, however, a \sbol{Component} will simply be used as a pointer to an external description of a material to be manipulated, and the only property required for interpreting PAML will be \sbolmult{type:C}{type}.
+In many LabOP usages, however, a \sbol{Component} will simply be used as a pointer to an external description of a material to be manipulated, and the only property required for interpreting LabOP will be \sbolmult{type:C}{type}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -244,45 +244,45 @@ In many PAML usages, however, a \sbol{Component} will simply be used as a pointe
 
 \begin{itemize}
 \item \label{sec:sbol:type:C}
-The \sbolmult{type:C}{type} property MUST have one or more \paml{URI}s specifying the category of biochemical or physical entity (for example DNA, protein, or simple chemical) that a \sbol{Component} object represents.
+The \sbolmult{type:C}{type} property MUST have one or more \labop{URI}s specifying the category of biochemical or physical entity (for example DNA, protein, or simple chemical) that a \sbol{Component} object represents.
 
 \item \label{sec:sbol:hasFeature}
-The \sbol{hasFeature} property MAY have any number of \paml{URI}s, each referencing a \sbol{Feature} object. Each \sbol{Feature} represents a specific occurrence of a part, subsystem, or other notable aspect within that design, such as an ingredient in the composition of a growth medium.
-\\{\em This is not typically required for specifying protocols in PAML.}
+The \sbol{hasFeature} property MAY have any number of \labop{URI}s, each referencing a \sbol{Feature} object. Each \sbol{Feature} represents a specific occurrence of a part, subsystem, or other notable aspect within that design, such as an ingredient in the composition of a growth medium.
+\\{\em This is not typically required for specifying protocols in LabOP.}
 
 \item \label{sec:sbol:role:C}
-The \sbolmult{role:C}{role} property MAY have any number of \paml{URI}s, which MUST identify terms from ontologies that are consistent with the \sbolmult{type:C}{type} property of the \sbol{Component}. 
-\\{\em This is not typically required for specifying protocols in PAML.}
+The \sbolmult{role:C}{role} property MAY have any number of \labop{URI}s, which MUST identify terms from ontologies that are consistent with the \sbolmult{type:C}{type} property of the \sbol{Component}. 
+\\{\em This is not typically required for specifying protocols in LabOP.}
 
 \item \label{sec:sbol:hasSequence:C}
-The \sbolmult{hasSequence:C}{hasSequence} property MAY have any number of \paml{URI}s, each referencing a \external{sbol:Sequence} object.  These objects define the primary structure or structures of the \sbol{Component}.
-\\{\em This is not typically required for specifying protocols in PAML.}
+The \sbolmult{hasSequence:C}{hasSequence} property MAY have any number of \labop{URI}s, each referencing a \external{sbol:Sequence} object.  These objects define the primary structure or structures of the \sbol{Component}.
+\\{\em This is not typically required for specifying protocols in LabOP.}
 
 \item \label{sec:sbol:hasConstraint}
-The \sbol{hasConstraint} property MAY have any number of \paml{URI}s, each referencing a \external{sbol:Constraint} object.
+The \sbol{hasConstraint} property MAY have any number of \labop{URI}s, each referencing a \external{sbol:Constraint} object.
 These objects describe, among other things, any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{Feature} objects contained by the \sbol{Component}, as well as spatial relations such as containment and identity relations.
-\\{\em This is not typically required for specifying protocols in PAML.}
+\\{\em This is not typically required for specifying protocols in LabOP.}
 
 \item \label{sec:sbol:hasInteraction}
-The \sbol{hasInteraction} property MAY have any number of \paml{URI}s, each referencing an \external{sbol:Interaction} object describing a behavioral relationship between \sbol{Feature}s in the \sbol{Component}.
-\\{\em This is not typically required for specifying protocols in PAML.}
+The \sbol{hasInteraction} property MAY have any number of \labop{URI}s, each referencing an \external{sbol:Interaction} object describing a behavioral relationship between \sbol{Feature}s in the \sbol{Component}.
+\\{\em This is not typically required for specifying protocols in LabOP.}
 
 \item \label{sec:sbol:hasInterface}
-The \sbol{hasInterface} property is OPTIONAL and MAY have a \paml{URI} referencing an \external{sbol:Interface} object that indicates the inputs, outputs, and non-directional points of connection to a \sbol{Component}.
-\\{\em This is not typically required for specifying protocols in PAML.}
+The \sbol{hasInterface} property is OPTIONAL and MAY have a \labop{URI} referencing an \external{sbol:Interface} object that indicates the inputs, outputs, and non-directional points of connection to a \sbol{Component}.
+\\{\em This is not typically required for specifying protocols in LabOP.}
 
 \item \label{sec:sbol:hasModel}
-The \sbol{hasModel} property MAY have any number of \paml{URI}s, each referencing a \external{sbol:Model} object that links the \sbol{Component} to a computational model in any format.
-\\{\em This is not typically required for specifying protocols in PAML.}
+The \sbol{hasModel} property MAY have any number of \labop{URI}s, each referencing a \external{sbol:Model} object that links the \sbol{Component} to a computational model in any format.
+\\{\em This is not typically required for specifying protocols in LabOP.}
 \end{itemize}
 
 \subsection{PROV-O}
 
-The PROV-O ontology (\url{https://www.w3.org/ns/prov#}) defines a complementary data model that is leveraged by PAML to describe provenance.
-PAML builds on PROV-O to represent the execution of \paml{Protocol} workflows and the \paml{Primitive} behaviors that they comprise.
-A subset of PROV-O, already adapted for use with SBOL, is used for this purpose by PAML as well.
+The PROV-O ontology (\url{https://www.w3.org/ns/prov#}) defines a complementary data model that is leveraged by LabOP to describe provenance.
+LabOP builds on PROV-O to represent the execution of \labop{Protocol} workflows and the \labop{Primitive} behaviors that they comprise.
+A subset of PROV-O, already adapted for use with SBOL, is used for this purpose by LabOP as well.
 
-The key class used is \prov{Activity}, which serves as a parent class for \paml{BehaviorExecution} records, along with \prov{Association} and \prov{Agent}, which are used to record the entity carrying out an execution.
+The key class used is \prov{Activity}, which serves as a parent class for \labop{BehaviorExecution} records, along with \prov{Association} and \prov{Agent}, which are used to record the entity carrying out an execution.
 We repeat here only the key portions referenced in this specification.
 
 \subsubsection{prov:Activity}
@@ -293,7 +293,7 @@ Each \prov{Activity} includes optional \prov{startedAtTime} and \prov{endedAtTim
 
 \begin{itemize}
 \item \label{sec:type:Activity}
-An \prov{Activity} MAY have one or more \pamlmult{type:Activity}{type} properties, each of type \paml{URI} that explicitly specifies the type of the provenance \prov{Activity} in more detail.
+An \prov{Activity} MAY have one or more \labopmult{type:Activity}{type} properties, each of type \labop{URI} that explicitly specifies the type of the provenance \prov{Activity} in more detail.
 
 \item \label{sec:prov:startedAtTime}
 The \prov{startedAtTime} property is OPTIONAL and contains a DateTime value, indicating when the activity started.  If this property is present, then the \prov{endedAtTime} property is REQUIRED.
@@ -312,10 +312,10 @@ An \prov{Association} is linked to an \prov{Agent} through the \prov{agent} rela
 
 \begin{itemize}
 \item \label{sec:prov:agent}
-The \prov{agent} property is REQUIRED and MUST contain a \paml{URI} that refers to an \prov{Agent} object.
+The \prov{agent} property is REQUIRED and MUST contain a \labop{URI} that refers to an \prov{Agent} object.
 
 \item \label{sec:prov:hadRole:A}
-An \prov{Association} MAY have one or more \provmult{hadRole:A}{hadRole} properties, each of type \paml{URI} that refers to particular term(s) that describes the role of the \prov{Agent} in the parent \prov{Activity}. 
+An \prov{Association} MAY have one or more \provmult{hadRole:A}{hadRole} properties, each of type \labop{URI} that refers to particular term(s) that describes the role of the \prov{Agent} in the parent \prov{Activity}. 
 \end{itemize}
 
 \subsubsection{prov:Agent}
@@ -328,9 +328,9 @@ These agents should be annotated with additional information, such as software v
 
 \subsection{Ontology of Units of Measure}
 
-In most cases where a number is needed in PAML, that number is a measure with units associated with it.
+In most cases where a number is needed in LabOP, that number is a measure with units associated with it.
 The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. 
-A subset of OM, already adapted for use with SBOL, is used for this purpose by PAML as well.
+A subset of OM, already adapted for use with SBOL, is used for this purpose by LabOP as well.
 
 The key class used is \om{Measure}, which associates a number with a unit and a biology-related property.
 In most cases, it should be possible to use one of the \external{om:Unit} instances already defined by OM; when this is not possible, an appropriate unit can be defined using \external{om:Unit} and \external{om:Prefix} classes.
@@ -341,20 +341,20 @@ The purpose of the \om{Measure} class is to link a numerical value to a \externa
 
 \begin{itemize}
 \item \label{sec:om:hasNumericalValue}
-The \om{hasNumericalValue} property is REQUIRED and MUST contain a single \paml{float}.
+The \om{hasNumericalValue} property is REQUIRED and MUST contain a single \labop{float}.
 
 \item \label{sec:om:hasUnit:Measure}
-The \ommult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a \paml{URI} that refers to a \external{om:Unit}. 
+The \ommult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a \labop{URI} that refers to a \external{om:Unit}. 
 
 \item \label{sec:sbol:type:Measure}
-The \sbolmult{type:Measure}{type} property MAY contain any number of \paml{URI}s. It is RECOMMENDED that one of these \paml{URI}s identify a term from the Systems Description Parameter branch of the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{type:Measure}{type} property was added by SBOL to describe different types of parameters 
+The \sbolmult{type:Measure}{type} property MAY contain any number of \labop{URI}s. It is RECOMMENDED that one of these \labop{URI}s identify a term from the Systems Description Parameter branch of the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{type:Measure}{type} property was added by SBOL to describe different types of parameters 
 (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/SBO:0000612}).
 \end{itemize}
 
 \subsection{Recommended Ontologies for External Terms}
 \label{sec:recomm_ontologies}
 
-External ontologies and controlled vocabularies are an integral part of SBOL and thus used by PAML as well. SBOL uses \paml{URI}s to access existing biological information through these resources. 
+External ontologies and controlled vocabularies are an integral part of SBOL and thus used by LabOP as well. SBOL uses \labop{URI}s to access existing biological information through these resources. 
 Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 The URIs for ontological terms SHOULD come from \url{identifiers.org}.  However, it is acceptable to use terms from \url{purl.org} as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames, and software may convert between these forms as required.
 

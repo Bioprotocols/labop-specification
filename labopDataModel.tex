@@ -1,19 +1,17 @@
 %
 \normalsize%
-\section{Data Model}%
-\label{sec:DataModel}%
 \subsection{Protocol}%
 \label{sec:labop:Protocol}%
-A Protocol describes how to carry out some form of laboratory or research process.
-              For example, a Protocol could describe DNA miniprep, Golden-Gate assembly, a cell culture experiment.
-              At present this class adds no additional information over uml:Activity, but may in the future.%
-\linebreak%
+A \labop{Protocol} describes how to carry out some form of laboratory or research process.
+              For example, a \labop{Protocol} could describe DNA miniprep, Golden-Gate assembly, a cell culture experiment.
+              At present this class adds no additional information over \uml{Activity}, but may in the future.%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/Protocol_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.21595744680851064\textwidth]{labop_classes/Protocol_abstraction_hierarchy.pdf}%
 \caption{Protocol}%
 \label{fig:Protocol}%
 \end{figure}
@@ -23,16 +21,16 @@ The \labop{Protocol} class is shown in \ref{fig:Protocol}. It is derived from \u
 %
 \subsection{Primitive}%
 \label{sec:labop:Primitive}%
-A Primitive describes a library function that acts as a basic ``building block'' for a Protocol.
-              For example, a Primitive could describe pipetting, measuring absorbance in a plate reader, or centrifuging.
-              At present this class adds no additional information over uml:Behavior, but may in the future.%
-\linebreak%
+A \labop{Primitive} describes a library function that acts as a basic ``building block'' for a \labop{Protocol}.
+              For example, a \labop{Primitive} could describe pipetting, measuring absorbance in a plate reader, or centrifuging.
+              At present this class adds no additional information over \uml{Behavior}, but may in the future.%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/Primitive_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.21893617021276596\textwidth]{labop_classes/Primitive_abstraction_hierarchy.pdf}%
 \caption{Primitive}%
 \label{fig:Primitive}%
 \end{figure}
@@ -42,47 +40,37 @@ The \labop{Primitive} class is shown in \ref{fig:Primitive}. It is derived from 
 %
 \subsection{BehaviorExecution}%
 \label{sec:labop:BehaviorExecution}%
-A BehaviorExecution is a record of how a Protocol, Primitive, or other uml:Behavior was carried out.
+A \labop{BehaviorExecution} is a record of how a \labop{Protocol}, \labop{Primitive}, or other \uml{Behavior} was carried out.
         The execution of the behavior could be either real or simulated.
 
-        In specifying a BehaviorExecution, the prov:type field inherited from prov:Activity is used to indicate the
-        uml:Behavior whose execution is being recorded. Precisely one value of prov:type MUST be a URI for a uml:Behavior.
+        In specifying a \labop{BehaviorExecution}, the prov:type field inherited from \prov{Activity} is used to indicate the
+        \uml{Behavior} whose execution is being recorded. Precisely \sbol{one} value of prov:type MUST be a URI for a \uml{Behavior}.
         The prov:startedAtTime and prov:endedAtTime fields SHOULD be used to record timing information as this becomes
         available.
-        Finally, the entity carrying out the execution SHOULD be recorded as a prov:Agent indicated using a
-        prov:Association.
+        Finally, the entity carrying out the execution SHOULD be recorded as a \prov{Agent} indicated using a
+        \prov{Association}.
 
-        Note that a BehaviorExecution can be used to record both the state of an in-progress execution as well as an
-        execution that has completed. As a BehaviorExecution proceeds, all values of its properties are monotonic,
+        Note that a \labop{BehaviorExecution} can be used to record both the state of an in-progress execution as well as an
+        execution that has completed. As a \labop{BehaviorExecution} proceeds, all values of its properties are monotonic,
         i.e., they are only added to and never changed.
 
         TODO: need to changing completedNormally to allow indication of an in-progress BehaviorExecution
         TODO: Is there a good ontology for agent roles in association?%
-\linebreak%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/BehaviorExecution_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.7327659574468085\textwidth]{labop_classes/BehaviorExecution_abstraction_hierarchy.pdf}%
 \caption{BehaviorExecution}%
 \label{fig:BehaviorExecution}%
 \end{figure}
 
 %
 The \labop{BehaviorExecution} class is shown in \ref{fig:BehaviorExecution}. It is derived from \prov{Activity} and includes the following specializations: \labop{ProtocolExecution}. %
-\labop{BehaviorExecution} includes the following properties: \labop{completedNormally}, \labop{consumedMaterial}, \labop{parameterValuePair}. %
+This class includes the following properties: \labop{completedNormally}, \labop{parameterValuePair}, \labop{consumedMaterial}. %
 \begin{itemize}%
-\item%
-The \labop{consumedMaterial} property is OPTIONAL and contains URI references to associated objects of type MaterialThis property is used to record the noteworthy consumables used during the execution of the
-        Behavior. For example, a cell culture protocols will consume various reagents and samples of cells. Materials
-        with the same specification SHOULD be consolidated, such that the list of materials SHOULD NOT contain two
-        materials with the same specification.
-
-        For example, consuming 5.0 mL of PBS and 2.0 mL of PBS should be recorded as consuming 7.0 mL of PBS.
-        Complex materials, however, MAY contain the same material more than once in their substructure.
-        For example, M9 media contains glucose, but it would not be necessary to consolidate the glucose in M9 media
-        with additional glucose that was added as a supplement, since that would change the definition of the media.%
 \item%
 The \labop{parameterValuePair} property is OPTIONAL and contains URI references to associated objects of type ParameterValueThe parameterValuePair property is used to record the value that was associated with each
         uml:Parameter for the uml:Behavior when it was executed, by means of a ParameterValue object.
@@ -94,83 +82,93 @@ The \labop{parameterValuePair} property is OPTIONAL and contains URI references 
         TODO: are multiple values allowed, or do those need to be passed as list/set types?
         %
 \item%
+The \labop{consumedMaterial} property is OPTIONAL and contains URI references to associated objects of type MaterialThis property is used to record the noteworthy consumables used during the execution of the
+        Behavior. For example, a cell culture protocols will consume various reagents and samples of cells. Materials
+        with the same specification SHOULD be consolidated, such that the list of materials SHOULD NOT contain two
+        materials with the same specification.
+
+        For example, consuming 5.0 mL of PBS and 2.0 mL of PBS should be recorded as consuming 7.0 mL of PBS.
+        Complex materials, however, MAY contain the same material more than once in their substructure.
+        For example, M9 media contains glucose, but it would not be necessary to consolidate the glucose in M9 media
+        with additional glucose that was added as a supplement, since that would change the definition of the media.%
+\item%
 The \labop{completedNormally} property is REQUIRED and has a singleton value of type booleanThis boolean should be set to true if the Behavior completed normally and false if there
         was some exception condition. At present, no further information is being encoded about exceptions, but this
         is an extension that is anticipated for the future.%
 \end{itemize}%
 \subsubsection{ProtocolExecution}%
 \label{sec:labop:ProtocolExecution}%
-A ProtocolExecution expands on the information in a BehaviorExecution by including records for
-        the nodes and edges defining the Protocol's behavior as a uml:Activity. Specifically, the execution property
-        is used to record each firing of a uml:ActivityNode and the flow property is used to record each time a token
-        moves along a uml:ActivityEdge.
-        Otherwise, a ProtocolExecution is used exactly the same way as its parent class BehaviorExecution.
+A \labop{ProtocolExecution} expands on the information in a \labop{BehaviorExecution} by including records for
+        the nodes and edges defining the Protocol's behavior as a \uml{Activity}. Specifically, the execution property
+        is used to record each firing of a \uml{ActivityNode} and the flow property is used to record each time a token
+        moves along a \uml{ActivityEdge}.
+        Otherwise, a \labop{ProtocolExecution} is used exactly the same way as its parent class \labop{BehaviorExecution}.
 
         TODO: consider dropping the protocol field as redundant with use prov:type field in its parent%
-\linebreak%
+\newline%
 \linebreak%
 The \labop{ProtocolExecution} class is shown in \ref{fig:BehaviorExecution}. It is derived from \labop{BehaviorExecution}.%
-\labop{ProtocolExecution} includes the following properties: \labop{flow}, \labop{protocol}, \labop{execution}. %
+This class includes the following properties: \labop{execution}, \labop{protocol}, \labop{flow}. %
 \begin{itemize}%
-\item%
-The \labop{flow} property is OPTIONAL and contains URI references to associated objects of type ActivityEdgeFlowEach instance of this property links to an ActivityEdgeFlow that records one movement of a UML
-        token along a uml:ActivityEdge during the execution of its containing Protocol%
-\item%
-The \labop{protocol} property is REQUIRED and contains a URI reference to an associated object of type ProtocolThis property appears to be redundant with the use of prov:type specified by BehaviorExecution, and is likely to be deleted%
 \item%
 The \labop{execution} property is OPTIONAL and contains URI references to associated objects of type ActivityNodeExecutionEach instance of this property links to an ActivityNodeExecution that records one
         firing of a uml:ActivityNode during the execution of its containing Protocol%
+\item%
+The \labop{protocol} property is REQUIRED and contains a URI reference to an associated object of type ProtocolThis property appears to be redundant with the use of prov:type specified by BehaviorExecution, and is likely to be deleted%
+\item%
+The \labop{flow} property is OPTIONAL and contains URI references to associated objects of type ActivityEdgeFlowEach instance of this property links to an ActivityEdgeFlow that records one movement of a UML
+        token along a uml:ActivityEdge during the execution of its containing Protocol%
 \end{itemize}%
 \subsection{ParameterValue}%
 \label{sec:labop:ParameterValue}%
 This class is used to represent the assignment of a value to a parameter in a BehaviorExecution
-        that records the execution of a uml:Behavior. This class is similar to prov:Usage, but instead of always
+        that records the execution of a \uml{Behavior}. This class is similar to \prov{Usage}, but instead of always
         pointing to an object it uses an arbitrary literal (which might or might not be an object). An example would
         be recording that a plate reader absorbance measurement was taken with its absorbance wavelength parameter set
         to 600 nm%
-\linebreak%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/ParameterValue_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.42148936170212764\textwidth]{labop_classes/ParameterValue_abstraction_hierarchy.pdf}%
 \caption{ParameterValue}%
 \label{fig:ParameterValue}%
 \end{figure}
 
 %
 The \labop{ParameterValue} class is shown in \ref{fig:ParameterValue}. It is derived from \sbol{Identified}.%
-\labop{ParameterValue} includes the following properties: \labop{parameterValue}, \labop{parameter}. %
+This class includes the following properties: \labop{parameter}, \labop{parameterValue}. %
 \begin{itemize}%
-\item%
-The \labop{parameterValue} property is REQUIRED and contains a URI reference to an associated object of type LiteralSpecificationThis property points to the literal value used for the parameter during execution (e.g., a
-        uml:LiteralIdentified for an om:Measure representing a 600 nm wavelength).%
 \item%
 The \labop{parameter} property is REQUIRED and contains a URI reference to an associated object of type ParameterThis property points to the uml:Parameter associated with the value (e.g., wavelength for a
         plate reader absorbance measurement behavior).%
+\item%
+The \labop{parameterValue} property is REQUIRED and contains a URI reference to an associated object of type LiteralSpecificationThis property points to the literal value used for the parameter during execution (e.g., a
+        uml:LiteralIdentified for an om:Measure representing a 600 nm wavelength).%
 \end{itemize}%
 \subsection{Material}%
 \label{sec:labop:Material}%
 An amount of material allocated for use during the execution of a behavior.
-        For example a Material might be used to specify 1 96-well flat-bottom microplate or 2.5 mL of 10 millimolar glucose.
+        For example a \labop{Material} might be used to specify 1 96-well flat-bottom microplate or 2.5 mL of 10 millimolar glucose.
 
-        TODO: consider changing type of specification to allow non-TopLevel descriptions, such as a ContainerSpec or sbol:ExternallyDefined
+        TODO: consider changing type of specification to allow non-TopLevel descriptions, such as a \labop{ContainerSpec} or sbol:ExternallyDefined
         TODO: consider adding a field to distinguish between expended vs. reusable materials.%
-\linebreak%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/Material_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.35893617021276597\textwidth]{labop_classes/Material_abstraction_hierarchy.pdf}%
 \caption{Material}%
 \label{fig:Material}%
 \end{figure}
 
 %
 The \labop{Material} class is shown in \ref{fig:Material}. It is derived from \sbol{Identified}.%
-\labop{Material} includes the following properties: \labop{amount}, \labop{specification}. %
+This class includes the following properties: \labop{amount}, \labop{specification}. %
 \begin{itemize}%
 \item%
 The \labop{amount} property is REQUIRED and contains a URI reference to an associated object of type MeasureThe amount property of a Material is used to indicate the quantity of material used.
@@ -183,69 +181,69 @@ The \labop{specification} property is REQUIRED and contains a URI reference to a
 \end{itemize}%
 \subsection{ActivityEdgeFlow}%
 \label{sec:labop:ActivityEdgeFlow}%
-An ActivityEdgeFlow records one movement of a UML token along a uml:ActivityEdge during the
-        execution of its containing Protocol. If the edge is a uml:ObjectFlow, then the value MUST be set.
-        If the edge is a uml:ControlFlow, then the value MUST NOT be set.
+An \labop{ActivityEdgeFlow} records \sbol{one} movement of a UML token along a \uml{ActivityEdge} during the
+        execution of its containing \labop{Protocol}. If the edge is a \uml{ObjectFlow}, then the value MUST be set.
+        If the edge is a \uml{ControlFlow}, then the value MUST NOT be set.
 
-        For instance, the ActivityEdgeFlow for a uml:ObjectFlow might record a measurement being sent to an output
-        uml:Parameter, while the ActivityEdgeFlow for a uml:ControlFlow might record a decision to proceed down a
-        particular branch from a uml:DecisionNode.
+        For instance, the \labop{ActivityEdgeFlow} for a \uml{ObjectFlow} might record a measurement being sent to an output
+        \uml{Parameter}, while the \labop{ActivityEdgeFlow} for a \uml{ControlFlow} might record a decision to proceed down a
+        particular branch from a \uml{DecisionNode}.
 
-        Note that a uml:ActivityEdge might appear in multiple ActivityEdgeFlow records associated with a single
-        ProtocolExecution, e.g., due to a loop in the Protocol.  It also might not appear in any, if the
-        uml:ActivityEdge is on a path not taken due to branching control flow.
+        Note that a \uml{ActivityEdge} might appear in multiple \labop{ActivityEdgeFlow} records associated with a single
+        \labop{ProtocolExecution}, e.g., due to a loop in the \labop{Protocol}.  It also might not appear in any, if the
+        \uml{ActivityEdge} is on a path not taken due to branching control flow.
 
         TODO: correct the cardinality: edgeValue is supposed to be optional, not edge
         %
-\linebreak%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/ActivityEdgeFlow_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.4319148936170213\textwidth]{labop_classes/ActivityEdgeFlow_abstraction_hierarchy.pdf}%
 \caption{ActivityEdgeFlow}%
 \label{fig:ActivityEdgeFlow}%
 \end{figure}
 
 %
 The \labop{ActivityEdgeFlow} class is shown in \ref{fig:ActivityEdgeFlow}. It is derived from \sbol{Identified}.%
-\labop{ActivityEdgeFlow} includes the following properties: \labop{edgeValue}, \labop{edge}, \labop{tokenSource}. %
+This class includes the following properties: \labop{tokenSource}, \labop{edge}, \labop{edgeValue}. %
 \begin{itemize}%
 \item%
-The \labop{edgeValue} property is REQUIRED and contains a URI reference to an associated object of type IdentifiedThis property is used to indicate the value of a token that moved on a uml:ObjectFlow edge.%
+The \labop{tokenSource} property is REQUIRED and contains a URI reference to an associated object of type ActivityNodeExecutionThis property is used to indicate the ActivityNodeExecution that produced the token.%
 \item%
 The \labop{edge} property is OPTIONAL and contains a URI reference to an associated object of type ActivityEdgeThis property is used to indicate the uml:ActivityEdge down which the token moved.%
 \item%
-The \labop{tokenSource} property is REQUIRED and contains a URI reference to an associated object of type ActivityNodeExecutionThis property is used to indicate the ActivityNodeExecution that produced the token.%
+The \labop{edgeValue} property is REQUIRED and contains a URI reference to an associated object of type IdentifiedThis property is used to indicate the value of a token that moved on a uml:ObjectFlow edge.%
 \end{itemize}%
 \subsection{ActivityNodeExecution}%
 \label{sec:labop:ActivityNodeExecution}%
-An ActivityNodeExecution records one instance in which a uml:ActivityNode is executed during the
-        execution of its containing Protocol.
+An \labop{ActivityNodeExecution} records \sbol{one} instance in which a \uml{ActivityNode} is executed during the
+        execution of its containing \labop{Protocol}.
 
-        For instance, the ActivityNodeExecution for a uml:CallBehaviorAction to measure absorbance on a plate reader
-        would set its node property to point to the uml:CallBehaviorAction and might have incomingFlow properties
-        indicating arrival of information about the samples to measure via a uml:ObjectFlow and the arrival a
-        of permission to begin via a uml:ControlFlow.
+        For instance, the \labop{ActivityNodeExecution} for a \uml{CallBehaviorAction} to measure absorbance on a plate reader
+        would set its node property to point to the \uml{CallBehaviorAction} and might have incomingFlow properties
+        indicating arrival of information about the samples to measure via a \uml{ObjectFlow} and the arrival a
+        of permission to begin via a \uml{ControlFlow}.
 
-        Note that a uml:ActivityNode might appear in multiple ActivityNodeExecution records associated with a single
-        ProtocolExecution, e.g., due to a loop in the Protocol.  It also might not appear in any, if the
-        uml:ActivityNode is on a path not taken due to branching control flow.%
-\linebreak%
+        Note that a \uml{ActivityNode} might appear in multiple \labop{ActivityNodeExecution} records associated with a single
+        \labop{ProtocolExecution}, e.g., due to a loop in the \labop{Protocol}.  It also might not appear in any, if the
+        \uml{ActivityNode} is on a path not taken due to branching control flow.%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/ActivityNodeExecution_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.6061702127659574\textwidth]{labop_classes/ActivityNodeExecution_abstraction_hierarchy.pdf}%
 \caption{ActivityNodeExecution}%
 \label{fig:ActivityNodeExecution}%
 \end{figure}
 
 %
 The \labop{ActivityNodeExecution} class is shown in \ref{fig:ActivityNodeExecution}. It is derived from \sbol{Identified} and includes the following specializations: \labop{CallBehaviorExecution}. %
-\labop{ActivityNodeExecution} includes the following properties: \labop{node}, \labop{incomingFlow}. %
+This class includes the following properties: \labop{node}, \labop{incomingFlow}. %
 \begin{itemize}%
 \item%
 The \labop{node} property is REQUIRED and contains a URI reference to an associated object of type ActivityNodeThis property is used to indicate the uml:ActivityNode that has been execcuted.%
@@ -255,16 +253,16 @@ The \labop{incomingFlow} property is OPTIONAL and contains URI references to ass
 \end{itemize}%
 \subsubsection{CallBehaviorExecution}%
 \label{sec:labop:CallBehaviorExecution}%
-A CallBehaviorExecution extends ActivityNodeExecution by adding a pointer to a BehaviorExecution
-        record for the uml:Behavior that is being executed.
+A \labop{CallBehaviorExecution} extends \labop{ActivityNodeExecution} by adding a pointer to a BehaviorExecution
+        record for the \uml{Behavior} that is being executed.
 
-        For a primitive action (e.g., measuring absorbance on a plate reader), this is a plain BehaviorExecution,
-        while for calling a Protocol as a sub-routine (e.g., to run a stage of an Type IIS assembly), this would be a
-        ProtocolExecution.%
-\linebreak%
+        For a primitive action (e.g., measuring absorbance on a plate reader), this is a plain \labop{BehaviorExecution},
+        while for calling a \labop{Protocol} as a sub-routine (e.g., to run a stage of an Type IIS assembly), this would be a
+        \labop{ProtocolExecution}.%
+\newline%
 \linebreak%
 The \labop{CallBehaviorExecution} class is shown in \ref{fig:ActivityNodeExecution}. It is derived from \labop{ActivityNodeExecution}.%
-\labop{CallBehaviorExecution} includes the following properties: \labop{call}. %
+This class includes the following properties: \labop{call}. %
 \begin{itemize}%
 \item%
 The \labop{call} property is REQUIRED and contains a URI reference to an associated object of type BehaviorExecutionThis property indicates the BehaviorExecution record for the uml:Behavior that was called.%
@@ -272,31 +270,31 @@ The \labop{call} property is REQUIRED and contains a URI reference to an associa
 \subsection{SampleCollection}%
 \label{sec:labop:SampleCollection}%
 SampleCollection is the base class for describing the collections of physical materials that are
-         acted upon by a Protocol. For example, a SampleCollection might describe a set of 10 cell cultures growing in
+         acted upon by a \labop{Protocol}. For example, a \labop{SampleCollection} might describe a set of 10 cell cultures growing in
          96-well plate cells, or a set of 6 streaked agar plates, or a single 500 mL flask filled with media.
 
-         There are two types of SampleCollection. A SampleArray specifies an n-dimensional rectangular array of samples,
-         all stored in the same type of container. A SampleMask specifies a subset of a SampleCollection by means of an
+         There are two types of \labop{SampleCollection}. A \labop{SampleArray} specifies an n-dimensional rectangular array of samples,
+         all stored in the same type of container. A \labop{SampleMask} specifies a subset of a \labop{SampleCollection} by means of an
          array of Boolean values indicating whether each element is included or excluded from the subset.
 
-         Note, however, that a SampleCollection is a logical object and not a physical object. Thus, while a
-         SampleCollection might describe a set of samples in 96-well plate wells, it does not necessarily identify
+         Note, however, that a \labop{SampleCollection} is a logical object and not a physical object. Thus, while a
+         \labop{SampleCollection} might describe a set of samples in 96-well plate wells, it does not necessarily identify
          a particular 96-well plate or the location of those wells.  In practice, these will be determined as a
-         result of the specific library calls made to generate SampleCollection objects, and may not be determined
+         result of the specific library calls made to generate \labop{SampleCollection} objects, and may not be determined
          until the protocol is actually run in a particular execution environment.
 
-         This is important for increasing the flexibility with which a Protocol can be specified and applied.
-         Consider, for example, a cell culturing protocol that includes a step to measure sample absorbance on a plate
+         This is important for increasing the flexibility with which a \labop{Protocol} can be specified and applied.
+         Consider, for example, a cell culturing protocol that includes a step to measure \sbol{sample} absorbance on a plate
          reader. Describing this step does not require knowing how the samples are laid out on the plate, and in many
          cases is even acceptable to run on samples across multiple plates. This flexibility will allow the cell
          culturing protocol to be applied for experiments with different numbers and arrangements of samples.%
-\linebreak%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/SampleCollection_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.40212765957446805\textwidth]{labop_classes/SampleCollection_abstraction_hierarchy.pdf}%
 \caption{SampleCollection}%
 \label{fig:SampleCollection}%
 \end{figure}
@@ -306,11 +304,11 @@ The \labop{SampleCollection} class is shown in \ref{fig:SampleCollection}. It is
 %
 \subsubsection{SampleArray}%
 \label{sec:labop:SampleArray}%
-A SampleArray specifies an n-dimensional rectangular array of samples, all stored in the same
-        type of container. For example, a SampleCollection might describe a set of 10 cell cultures growing in
+A \labop{SampleArray} specifies an n-dimensional rectangular array of samples, all stored in the same
+        type of container. For example, a \labop{SampleCollection} might describe a set of 10 cell cultures growing in
         96-well plate cells, or a set of 6 streaked agar plates, or a single 500 mL flask filled with media.
 
-        Wells may be full, in which case the contents property should contain a URI to a description of the sample,
+        Wells may be full, in which case the contents property should contain a URI to a description of the \sbol{sample},
         or empty, in which case the contents should be null.
 
         Note that this is a logical array, and does not necessarily indicate the actual layout of the samples in space.
@@ -320,14 +318,14 @@ A SampleArray specifies an n-dimensional rectangular array of samples, all store
 
         This also allows for higher-dimensional arrays where each dimension represents an experimental factor.
         For example, an experiment testing four factors with 3, 3, 4, and 5 values per factor, for a total of 180
-        combinations, could be represented as a 4-dimensional sample array of 96-well plate wells, and then end up
+        combinations, could be represented as a 4-dimensional \sbol{sample} array of 96-well plate wells, and then end up
         laid out over two plates.
 
         TODO: need to decide on the format of the contents description.%
-\linebreak%
+\newline%
 \linebreak%
 The \labop{SampleArray} class is shown in \ref{fig:SampleCollection}. It is derived from \labop{SampleCollection}.%
-\labop{SampleArray} includes the following properties: \labop{contents}, \labop{containerType}. %
+This class includes the following properties: \labop{contents}, \labop{containerType}. %
 \begin{itemize}%
 \item%
 The \labop{contents} property is REQUIRED and has a singleton value of type stringDescription of the contents.
@@ -339,18 +337,18 @@ The \labop{containerType} property is REQUIRED and has a singleton value of type
 \end{itemize}%
 \subsubsection{SampleMask}%
 \label{sec:labop:SampleMask}%
-A SampleMask is a subset of a SampleCollection. The subset of samples to be included is defined
-        by an array of Boolean values, where true values indicate that a sample is included and false values indicate
+A \labop{SampleMask} is a subset of a \labop{SampleCollection}. The subset of samples to be included is defined
+        by an array of Boolean values, where true values indicate that a \sbol{sample} is included and false values indicate
         that it is excluded.
 
-        The dimensions of the mask MUST be identical to the dimensions of the source SampleCollection. For this purpose,
-        the dimensions of a masked subset are not reduced, but remain the same as the original SampleArray. This allows
+        The dimensions of the mask MUST be identical to the dimensions of the source \labop{SampleCollection}. For this purpose,
+        the dimensions of a masked subset are not reduced, but remain the same as the original \labop{SampleArray}. This allows
         masks to be composed, such that SampleMask(source=SampleMask(source=X,mask=mask1),mask=mask2) is equivalent to
         SampleMask(source=X,mask=mask1 AND mask2). Note that this implies masks are commutative and idempotent.%
-\linebreak%
+\newline%
 \linebreak%
 The \labop{SampleMask} class is shown in \ref{fig:SampleCollection}. It is derived from \labop{SampleCollection}.%
-\labop{SampleMask} includes the following properties: \labop{mask}, \labop{source}. %
+This class includes the following properties: \labop{mask}, \labop{source}. %
 \begin{itemize}%
 \item%
 The \labop{source} property is REQUIRED and contains a URI reference to an associated object of type SampleCollectionThe source indicates the SampleCollection that is being subsetted via the mask%
@@ -362,62 +360,60 @@ The \labop{mask} property is REQUIRED and has a singleton value of type stringTh
 \end{itemize}%
 \subsection{SampleData}%
 \label{sec:labop:SampleData}%
-The SampleData class is used to associate a set of data with a collection of samples.
+The \labop{SampleData} class is used to associate a set of data with a collection of samples.
         This is typically used to capture measurements, e.g., an array of absorbance measurements collected by
         a plate reader. Using this data structure allows the values in a dataframe to be automatically linked to
         the descriptions of the samples that the data describes, which is critical for data analysis.
 
-        The dimensions of the sampleDataValues MUST equal the dimensions of the SampleCollection linked with fromSamples.
+        The dimensions of the sampleDataValues MUST equal the dimensions of the \labop{SampleCollection} linked with fromSamples.
 
         TODO: the format of the data values needs to be compatible with the array format chosen for the
-        SampleArray contents property. In this case, however, we also need to consider how we want to support
-        multiple values for each sample (e.g., measurement of both fluorescence and absorbance in a plate reader),
+        \labop{SampleArray} contents property. In this case, however, we also need to consider how we want to support
+        multiple values for each \sbol{sample} (e.g., measurement of both fluorescence and absorbance in a plate reader),
         as well as links to more complex data (e.g., results of flow cytometry or omics for each sample)%
-\linebreak%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/SampleData_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.3946808510638298\textwidth]{labop_classes/SampleData_abstraction_hierarchy.pdf}%
 \caption{SampleData}%
 \label{fig:SampleData}%
 \end{figure}
 
 %
 The \labop{SampleData} class is shown in \ref{fig:SampleData}. It is derived from \sbol{Identified}.%
-\labop{SampleData} includes the following properties: \labop{sampleDataValues}, \labop{fromSamples}. %
+This class includes the following properties: \labop{fromSamples}, \labop{sampleDataValues}. %
 \begin{itemize}%
 \item%
-The \labop{sampleDataValues} property is REQUIRED and contains a URI reference to an associated object of type stringThe sampleDataValues are an array of data values, one for each sample, format to be determined.%
-\item%
 The \labop{fromSamples} property is REQUIRED and contains a URI reference to an associated object of type SampleCollectionThe fromSamples property indicates the SampleCollection from which the data were collected.%
+\item%
+The \labop{sampleDataValues} property is REQUIRED and contains a URI reference to an associated object of type stringThe sampleDataValues are an array of data values, one for each sample, format to be determined.%
 \end{itemize}%
 \subsection{ContainerSpec}%
 \label{sec:labop:ContainerSpec}%
-A ContainerSpec is used to indicate the type of container to be used for a SampleArray, e.g.,
+A \labop{ContainerSpec} is used to indicate the type of container to be used for a \labop{SampleArray}, e.g.,
         a standard 96-well flat-bottom transparent plate.
 
         TODO: determine if we want to use this format or modify it in some way.%
-\linebreak%
+\newline%
 \linebreak%
 
 
 \begin{figure}[h!]%
 \centering%
-\includegraphics[width=0.8\textwidth]{labop_classes/ContainerSpec_abstraction_hierarchy.pdf}%
+\includegraphics[width=0.29936170212765956\textwidth]{labop_classes/ContainerSpec_abstraction_hierarchy.pdf}%
 \caption{ContainerSpec}%
 \label{fig:ContainerSpec}%
 \end{figure}
 
 %
 The \labop{ContainerSpec} class is shown in \ref{fig:ContainerSpec}. It is derived from \sbol{Identified}.%
-\labop{ContainerSpec} includes the following properties: \labop{queryString}, \labop{prefixMap}. %
+This class includes the following properties: \labop{prefixMap}, \labop{queryString}. %
 \begin{itemize}%
 \item%
-The \labop{queryString} property is REQUIRED and has a singleton value of type stringA query string, in OWL Manchester syntax, to be used to find matching containers in the ContainerSpec.%
-\item%
 The \labop{prefixMap} property is REQUIRED and has a singleton value of type stringA prefix map in JSON-LD format, to be applied to a queryString.%
-\end{itemize}
-
-%
+\item%
+The \labop{queryString} property is REQUIRED and has a singleton value of type stringA query string, in OWL Manchester syntax, to be used to find matching containers in the ContainerSpec.%
+\end{itemize}%
