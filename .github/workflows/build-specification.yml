@@ -45,7 +45,7 @@ jobs:
           cd ../labop/doc
           python generate_specification_content.py
           cd -
-          pdflatex paml.tex
+          pdflatex labop.tex
       - name: Set up temporary directory for testing artifacts
         run: |
           echo "GH_TMPDIR=$(mktemp -d)" >> $GITHUB_ENV  # Export the shell temp dir out to the Github CI runner
@@ -55,5 +55,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: specification-document
-          path: ./paml.pdf
+          path: ./labop.pdf
           retention-days: 1
