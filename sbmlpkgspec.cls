@@ -597,7 +597,7 @@ Package Specification Style]
 % file we use, depending on various factors, and we switch which file format
 % is used depending on the output we're producing. 
 
-\newcommand{\@badgebasefile}{PAML-logo}
+\newcommand{\@badgebasefile}{LabOP_narrow}
 
 \ifpdf
   % Request the JPG format specifically, because the resulting
